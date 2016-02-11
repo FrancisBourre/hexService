@@ -1,0 +1,28 @@
+{
+  "name": "hexservice",
+  "version": "1.0.0",
+  "description": "hexService contains services architecture written in Haxe",
+  
+  "directories": {
+    "src": "src",
+	"test": "test" 
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoclerLabs/hexService.git"
+  },
+  "keywords": [
+    "haxe",
+    "service",
+    "hexmachina"
+  ],
+  "author": "DoclerLabs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DoclerLabs/hexService/issues"
+  },
+  "homepage": "https://github.com/DoclerLabs/hexService#readme"
+}
