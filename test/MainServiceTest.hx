@@ -14,7 +14,7 @@ import hex.unittest.notifier.ConsoleNotifier;
  * ...
  * @author Francis Bourre
  */
-class MainMVCTest
+class MainServiceTest
 {
 	static public function main() : Void
 	{
