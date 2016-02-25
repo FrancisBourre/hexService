@@ -2,6 +2,7 @@ package hex.service.stateless.http;
 
 import haxe.Http;
 import hex.core.IAnnotationParsable;
+import hex.error.Exception;
 import hex.error.NullPointerException;
 import hex.log.Stringifier;
 import hex.service.stateless.AsyncStatelessService;
@@ -27,7 +28,9 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 		
 		if ( this._configuration == null || this._configuration.serviceUrl == null )
 		{
-			throw new NullPointerException( "._createRequest failed. ServiceConfiguration.serviceUrl shouldn't be null" );
+			this._status = StatelessService.IS_RUNNING;
+			this._onException( new NullPointerException( "_createRequest call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
+			return;
 		}
 		
 		this._createRequest();
@@ -133,7 +136,7 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 
 	function _onError( msg : String ) : Void
 	{
-		this._onErrorHandler( msg );
+		this._onException( new Exception( msg ) );
 	}
 	
 	function _onStatus( status : Int ) : Void

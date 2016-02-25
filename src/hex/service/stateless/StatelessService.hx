@@ -1,11 +1,13 @@
 package hex.service.stateless;
 
 import hex.data.IParser;
+import hex.error.Exception;
 import hex.error.IllegalStateException;
 import hex.error.UnsupportedOperationException;
 import hex.event.Dispatcher;
 import hex.event.IDispatcher;
 import hex.event.MessageType;
+import hex.log.Stringifier;
 import hex.service.AbstractService;
 import hex.service.ServiceConfiguration;
 import hex.service.stateless.IStatelessService;
@@ -38,8 +40,14 @@ class StatelessService<ServiceConfigurationType:ServiceConfiguration> extends Ab
 
 	override public function setConfiguration( configuration : ServiceConfigurationType ) : Void
 	{
-		this.wasUsed && this._throwExecutionIllegalStateError( "setConfiguration" );
-        this._configuration = configuration;
+		if ( this.wasUsed )
+		{
+			throw new IllegalStateException( "'setConfiguration' can't be called after service call @" + Stringifier.stringify( this ) );
+		}
+		else
+		{
+			this._configuration = configuration;
+		}
 	}
 	
 	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void
@@ -116,44 +124,23 @@ class StatelessService<ServiceConfigurationType:ServiceConfiguration> extends Ab
 
 		if ( this.isRunning )
 		{
-			msg = methodName + "() failed. This service is already processing.";
+			msg = "'" + methodName + "' call failed. This service is running and can't be called twice ";
 		}
 		else if ( this.isCancelled )
 		{
-			msg = methodName + "() failed. This service is cancelled.";
+			msg = "'" + methodName + "' call failed. This service is cancelled and can't be called twice ";
 		}
 		else if ( this.hasCompleted )
 		{
-			msg = methodName + "() failed. This service is completed and can't be called twice.";
+			msg = "'" + methodName + "' call failed. This service is completed and can't be called twice ";
 		}
 		else if ( this.hasFailed )
 		{
-			msg = methodName + "() failed. This service has failed and can't be called twice.";
+			msg = "'" + methodName + "' call failed. This service has failed and can't be called twice ";
 		}
 
 		this._release();
-		return this._throwIllegalStateError( msg );
-	}
-	
-	function _throwCancellationIllegalStateError() : Bool
-	{
-		var msg : String = "";
-
-		if ( isCancelled )
-		{
-			msg = "cancel() failed. This service was already cancelled.";
-		}
-		else if ( hasCompleted )
-		{
-			msg = "cancel() failed. This service was already completed.";
-		}
-		else if ( hasFailed )
-		{
-			msg = "cancel() failed. This service has already failed.";
-		}
-
-		this._release();
-		return this._throwIllegalStateError( msg );
+		return this._throwIllegalStateError( msg + "@" + Stringifier.stringify( this )  );
 	}
 
 	function _throwIllegalStateError( msg : String ) : Bool 
@@ -182,6 +169,18 @@ class StatelessService<ServiceConfigurationType:ServiceConfiguration> extends Ab
 		this._rawResult = null;
 		this._result = null;
 		this.handleFail();
+	}
+	
+	function _onException( e : Exception ) : Void
+	{
+		if ( this._ed.hasHandler( StatelessServiceMessage.FAIL ) )
+		{
+			this._onErrorHandler( null );
+		}
+		else
+		{
+			throw e;
+		}
 	}
 	
 	@:final 

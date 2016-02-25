@@ -1,6 +1,5 @@
 package hex.service.monitor;
 
-import hex.error.Exception;
 import hex.service.Service;
 
 /**
@@ -9,6 +8,6 @@ import hex.service.Service;
  */
 interface IServiceMonitor
 {
-	function handleError<ServiceType:Service>( service : ServiceType, error : Exception ) : Bool;
+	function getStrategy<ServiceType:Service>( service : ServiceType ) : IServiceMonitorStrategy<ServiceType>;
 	function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceMonitorStrategy<ServiceType> ) : Bool;
 }

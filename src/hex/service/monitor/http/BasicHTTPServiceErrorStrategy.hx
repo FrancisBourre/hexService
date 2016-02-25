@@ -16,7 +16,7 @@ class BasicHTTPServiceErrorStrategy<ServiceType:HTTPService<HTTPServiceConfigura
 	var _timeout 		: UInt;
 	var _retryMaxCount 	: UInt;
 	
-	var _services 		: HashMap<HTTPService<HTTPServiceConfiguration>, HTTPServiceErrorHelper>;
+	var _services 		: HashMap<HTTPService<HTTPServiceConfiguration>, HTTPServiceErrorHelper<ServiceType>>;
 	
 	public function new( retryMaxCount : UInt = 3, timeout : UInt = 1000 ) 
 	{
@@ -27,7 +27,25 @@ class BasicHTTPServiceErrorStrategy<ServiceType:HTTPService<HTTPServiceConfigura
 	
 	public function handleError( service : ServiceType, error : Exception ) : Bool
 	{
-		var helper : HTTPServiceErrorHelper = null;
+		return this._getHelper( service ).canRetry();
+	}
+	
+	public function retry( service : ServiceType ) : Void
+	{
+		this._getHelper( service ).retry();
+	}
+	
+	public function onReleaseHelper( service : ServiceType ) : Void 
+	{
+		if ( this._services.containsKey( service ) )
+		{
+			this._services.remove( service );
+		}
+	}
+	
+	function _getHelper( service : ServiceType ) : HTTPServiceErrorHelper<ServiceType>
+	{
+		var helper : HTTPServiceErrorHelper<ServiceType> = null;
 		
 		if ( this._services.containsKey( service ) )
 		{
@@ -40,14 +58,6 @@ class BasicHTTPServiceErrorStrategy<ServiceType:HTTPService<HTTPServiceConfigura
 			this._services.put( service, helper );
 		}
 		
-		return helper.retry();
-	}
-	
-	public function onReleaseHelper( service : ServiceType ) : Void 
-	{
-		if ( this._services.containsKey( service ) )
-		{
-			this._services.remove( service );
-		}
+		return helper;
 	}
 }

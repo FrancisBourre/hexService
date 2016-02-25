@@ -8,17 +8,17 @@ import hex.service.stateless.StatelessServiceMessage;
  * ...
  * @author Francis Bourre
  */
-class HTTPServiceErrorHelper
+class HTTPServiceErrorHelper<ServiceType:HTTPService<HTTPServiceConfiguration>>
 {
 	var _dispatcher 	: HTTPServiceErrorHelperDispatcher;
-	var _service 		: HTTPService<HTTPServiceConfiguration>;
+	var _service 		: ServiceType;
 	var _timer 			: Timer;
 	
 	var _timeout 		: UInt;
 	var _retryCount 	: UInt;
 	var _retryMaxCount 	: UInt;
 	
-	public function new( service : HTTPService<HTTPServiceConfiguration>, retryMaxCount : UInt = 3, timeout : UInt = 5000 )
+	public function new( service : ServiceType, retryMaxCount : UInt = 3, timeout : UInt = 5000 )
 	{
 		this._dispatcher	= new HTTPServiceErrorHelperDispatcher();
 		this._service 		= service;
@@ -43,6 +43,11 @@ class HTTPServiceErrorHelper
 		{
 			this._timer.stop();
 		}
+	}
+	
+	public function canRetry() : Bool
+	{
+		return this._retryCount < this._retryMaxCount;
 	}
 	
 	public function retry() : Bool
@@ -81,7 +86,7 @@ class HTTPServiceErrorHelper
 		}
 	}
 	
-	function _onServiceComplete( service : HTTPService<HTTPServiceConfiguration> ) : Void
+	function _onServiceComplete( service : ServiceType ) : Void
 	{
 		this._release();
 	}

@@ -9,7 +9,7 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  * @author Francis Bourre
  */
 @:rtti
-class AnotherMockHTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends HTTPService<ServiceConfigurationType>
+class AnotherMockHTTPService extends HTTPService<HTTPServiceConfiguration>
 {
 	public static var serviceCallCount 	: UInt 		= 0;
 	public static var errorThrown 		: Exception = null;
@@ -25,13 +25,19 @@ class AnotherMockHTTPService<ServiceConfigurationType:HTTPServiceConfiguration> 
 	
 	override function _onError( msg : String ) : Void
 	{
-		if ( !this.serviceMonitor.handleError( this, new MockHTTPServiceException( msg ) ) )
+		var e : Exception = new MockHTTPServiceException( msg );
+		
+		if ( this.serviceMonitor.getStrategy( this ).handleError( this, e ) )
 		{
-			//super._onError( msg );
+			this._reset();
+			this.serviceMonitor.getStrategy( this ).retry( this );
 		}
 		else
 		{
-			this._reset();
+			AnotherMockHTTPService.errorThrown = e;
+			
+			//In real case the line below should be uncommented
+			//super._onError( msg );
 		}
 	}
 	
@@ -44,7 +50,11 @@ class AnotherMockHTTPService<ServiceConfigurationType:HTTPServiceConfiguration> 
 		}
 		catch( e : Exception )
 		{
-			if ( !this.serviceMonitor.handleError( this, new MockHTTPServiceException( e.message ) ) )
+			if ( this.serviceMonitor.getStrategy( this ).handleError( this, new MockHTTPServiceException( e.message ) ) )
+			{
+				this.serviceMonitor.getStrategy( this ).retry( this );
+			}
+			else
 			{
 				AnotherMockHTTPService.errorThrown = e;
 			}

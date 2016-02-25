@@ -122,14 +122,34 @@ class HTTPServiceTest
 	@Test( "test error thrown with service call" )
 	public function testErrorThrownWithServiceCall() : Void
 	{
-		var service = new MockHTTPService();
-		Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without configuration should throw 'NullPointerException'" );
+		var listener = new MockHTTPServiceListener();
 		
 		var configuration = new MockHTTPServiceConfiguration();
 		configuration.serviceUrl = null;
 		
+		var service = new MockHTTPService();
+		Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without configuration should throw 'NullPointerException'" );
+		
+		service = new MockHTTPService();
 		service.setConfiguration( configuration );
 		Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without serviceUrl should throw 'NullPointerException'" );
+		
+		var service = new MockHTTPService();
+		service.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
+		service.call();
+		Assert.isTrue( service.hasFailed, "service call without configuration should fail" );
+		Assert.equals( 1, listener.onServiceFailCallCount, "" );
+		//Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without configuration should throw 'NullPointerException'" );
+		
+		
+		
+		service = new MockHTTPService();
+		service.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
+		service.setConfiguration( configuration );
+		service.call();
+		Assert.isTrue( service.hasFailed, "service call without serviceUrl should fail" );
+		Assert.equals( 2, listener.onServiceFailCallCount, "" );
+		//Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without serviceUrl should throw 'NullPointerException'" );
 	}
 	
 	@Test( "test release" )

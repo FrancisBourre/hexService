@@ -9,5 +9,6 @@ import hex.service.Service;
 
 interface IServiceMonitorStrategy<ServiceType:Service> 
 {
+	function retry( service : ServiceType ) : Void;
 	function handleError( service : ServiceType, error : Exception ) : Bool;
 }

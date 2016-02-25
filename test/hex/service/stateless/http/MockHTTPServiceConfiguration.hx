@@ -8,6 +8,6 @@ class MockHTTPServiceConfiguration extends HTTPServiceConfiguration
 {
 	public function new()
 	{
-		super( "" );
+		super( "https://github.com/DoclerLabs/hexService" );
 	}
 }

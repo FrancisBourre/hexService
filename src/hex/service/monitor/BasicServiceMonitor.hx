@@ -32,27 +32,18 @@ class BasicServiceMonitor extends StatefulService<ServiceConfiguration> implemen
 		
 	}
 	
-	public function handleError<ServiceType:Service>( service : ServiceType, error : Exception ) : Bool
+	public function getStrategy<ServiceType:Service>( service : ServiceType ) : IServiceMonitorStrategy<ServiceType>
 	{
-		var serviceMonitorStrategy : IServiceMonitorStrategy<ServiceType> = null;
-		
 		var serviceClasses : Array<Class<Dynamic>> = ClassUtil.getInheritanceChainFrom( service );
 		for ( serviceClass in serviceClasses )
 		{
 			if ( this._map.containsKey( serviceClass ) )
 			{
-				serviceMonitorStrategy = this._map.get( serviceClass );
-				break;
+				return this._map.get( serviceClass );
 			}
 		}
 		
-		if ( serviceMonitorStrategy != null )
-		{
-			return serviceMonitorStrategy.handleError( service, error );
-		}
-		
-		
-		return false;
+		return null;
 	}
 	
 	public function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceMonitorStrategy<ServiceType> ) : Bool
