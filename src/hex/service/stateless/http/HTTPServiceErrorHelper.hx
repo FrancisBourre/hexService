@@ -54,7 +54,7 @@ class HTTPServiceErrorHelper<ServiceType:HTTPService<HTTPServiceConfiguration>>
 	{
 		this.stopTimer();
 		
-		if ( this._retryCount < this._retryMaxCount )
+		if ( this.canRetry() )
 		{
 			this._retryCount++;
 			this._startTimer();
