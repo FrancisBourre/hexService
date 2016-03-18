@@ -11,7 +11,7 @@ import hex.service.stateless.http.IHTTPServiceErrorHelperListener;
  * ...
  * @author Francis Bourre
  */
-class BasicHTTPServiceErrorStrategy<ServiceType:HTTPService<HTTPServiceConfiguration>> implements IServiceMonitorStrategy<ServiceType> implements IHTTPServiceErrorHelperListener<ServiceType>
+class BasicHTTPServiceErrorStrategy<ServiceType:HTTPService<HTTPServiceConfiguration>> implements IServiceErrorStrategy<ServiceType> implements IHTTPServiceErrorHelperListener<ServiceType>
 {
 	var _timeout 		: UInt;
 	var _retryMaxCount 	: UInt;

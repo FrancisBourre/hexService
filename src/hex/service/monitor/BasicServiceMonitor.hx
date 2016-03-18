@@ -32,7 +32,7 @@ class BasicServiceMonitor extends StatefulService<ServiceConfiguration> implemen
 		
 	}
 	
-	public function getStrategy<ServiceType:Service>( service : ServiceType ) : IServiceMonitorStrategy<ServiceType>
+	public function getStrategy<ServiceType:Service>( service : ServiceType ) : IServiceErrorStrategy<ServiceType>
 	{
 		var serviceClasses : Array<Class<Dynamic>> = ClassUtil.getInheritanceChainFrom( service );
 		for ( serviceClass in serviceClasses )
@@ -46,7 +46,7 @@ class BasicServiceMonitor extends StatefulService<ServiceConfiguration> implemen
 		return null;
 	}
 	
-	public function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceMonitorStrategy<ServiceType> ) : Bool
+	public function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceErrorStrategy<ServiceType> ) : Bool
 	{
 		if ( !this._map.containsKey( serviceClass ) )
 		{
