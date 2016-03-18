@@ -9,5 +9,5 @@ import hex.service.Service;
 interface IServiceMonitor<StrategyType>
 {
 	function getStrategy<ServiceType:Service>( service : ServiceType ) : StrategyType;
-	function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceErrorStrategy<ServiceType> ) : Bool;
+	function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : StrategyType ) : Bool;
 }

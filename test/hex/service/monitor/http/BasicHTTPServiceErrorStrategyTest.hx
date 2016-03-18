@@ -3,6 +3,7 @@ package hex.service.monitor.http;
 import haxe.Timer;
 import hex.error.NullPointerException;
 import hex.inject.Injector;
+import hex.service.monitor.IServiceErrorStrategy;
 import hex.service.stateless.http.HTTPServiceConfiguration;
 import hex.service.stateless.http.IHTTPService;
 import hex.unittest.assertion.Assert;
@@ -26,7 +27,7 @@ class BasicHTTPServiceErrorStrategyTest
 		{
 		#end
 		
-		var serviceMonitor : BasicServiceMonitor = new BasicServiceMonitor();
+		var serviceMonitor = new BasicServiceMonitor<IServiceErrorStrategy<MockHTTPService>>();
 		serviceMonitor.mapStrategy( MockHTTPService, new BasicHTTPServiceErrorStrategy( 3, 100 ) );
 		
 		var injector : Injector = new Injector();
@@ -69,7 +70,7 @@ class BasicHTTPServiceErrorStrategyTest
 		{
 		#end
 		
-		var serviceMonitor : BasicServiceMonitor = new BasicServiceMonitor();
+		var serviceMonitor = new BasicServiceMonitor<IServiceErrorStrategy<MockHTTPService>>();
 		serviceMonitor.mapStrategy( MockHTTPService, new BasicHTTPServiceErrorStrategy( 3, 100 ) );
 		serviceMonitor.mapStrategy( AnotherMockHTTPService, new BasicHTTPServiceErrorStrategy( 6, 50 ) );
 		

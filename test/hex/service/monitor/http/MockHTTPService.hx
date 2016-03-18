@@ -1,6 +1,7 @@
 package hex.service.monitor.http;
 
 import hex.error.Exception;
+import hex.service.monitor.IServiceErrorStrategy;
 import hex.service.stateless.http.HTTPService;
 import hex.service.stateless.http.HTTPServiceConfiguration;
 
@@ -15,7 +16,7 @@ class MockHTTPService extends HTTPService<HTTPServiceConfiguration>
 	public static var errorThrown 		: Exception = null;
 	
 	@Inject
-	public var serviceMonitor : IServiceMonitor;
+	public var serviceMonitor : IServiceMonitor<IServiceErrorStrategy<MockHTTPService>>;
 	
 	public function new() 
 	{
