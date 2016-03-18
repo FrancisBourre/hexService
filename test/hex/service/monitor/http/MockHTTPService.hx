@@ -1,5 +1,6 @@
 package hex.service.monitor.http;
 
+import hex.di.ISpeedInjectorContainer;
 import hex.error.Exception;
 import hex.service.stateless.http.HTTPService;
 import hex.service.stateless.http.HTTPServiceConfiguration;
@@ -8,8 +9,7 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  * ...
  * @author Francis Bourre
  */
-@:rtti
-class MockHTTPService extends HTTPService<HTTPServiceConfiguration>
+class MockHTTPService extends HTTPService<HTTPServiceConfiguration> implements ISpeedInjectorContainer
 {
 	public static var serviceCallCount 	: UInt 		= 0;
 	public static var errorThrown 		: Exception = null;
