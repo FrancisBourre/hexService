@@ -1,15 +1,12 @@
 package hex.service.monitor;
 
 import hex.collection.HashMap;
-import hex.core.HashCodeFactory;
 import hex.error.Exception;
 import hex.error.IllegalArgumentException;
 import hex.log.Stringifier;
 import hex.service.Service;
 import hex.service.ServiceConfiguration;
-import hex.service.monitor.http.BasicHTTPServiceErrorStrategy;
 import hex.service.stateful.StatefulService;
-import hex.service.stateless.http.HTTPService;
 import hex.util.ClassUtil;
 
 /**
@@ -17,7 +14,7 @@ import hex.util.ClassUtil;
  * @author Francis Bourre
  */
 @:rtti
-class BasicServiceMonitor extends StatefulService<ServiceConfiguration> implements IServiceMonitor
+class BasicServiceMonitor<StrategyType> extends StatefulService<ServiceConfiguration> implements IServiceMonitor<StrategyType>
 {
 	var _map : HashMap<Dynamic, Dynamic>;
 	
@@ -32,7 +29,7 @@ class BasicServiceMonitor extends StatefulService<ServiceConfiguration> implemen
 		
 	}
 	
-	public function getStrategy<ServiceType:Service>( service : ServiceType ) : IServiceMonitorStrategy<ServiceType>
+	public function getStrategy<ServiceType:Service>( service : ServiceType ) : StrategyType
 	{
 		var serviceClasses : Array<Class<Dynamic>> = ClassUtil.getInheritanceChainFrom( service );
 		for ( serviceClass in serviceClasses )
@@ -46,7 +43,7 @@ class BasicServiceMonitor extends StatefulService<ServiceConfiguration> implemen
 		return null;
 	}
 	
-	public function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceMonitorStrategy<ServiceType> ) : Bool
+	public function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : StrategyType ) : Bool
 	{
 		if ( !this._map.containsKey( serviceClass ) )
 		{

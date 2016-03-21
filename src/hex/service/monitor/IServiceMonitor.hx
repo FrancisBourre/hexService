@@ -6,8 +6,8 @@ import hex.service.Service;
  * ...
  * @author Francis Bourre
  */
-interface IServiceMonitor
+interface IServiceMonitor<StrategyType>
 {
-	function getStrategy<ServiceType:Service>( service : ServiceType ) : IServiceMonitorStrategy<ServiceType>;
-	function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : IServiceMonitorStrategy<ServiceType> ) : Bool;
+	function getStrategy<ServiceType:Service>( service : ServiceType ) : StrategyType;
+	function mapStrategy<ServiceType:Service>( serviceClass : Class<ServiceType>, strategy : StrategyType ) : Bool;
 }

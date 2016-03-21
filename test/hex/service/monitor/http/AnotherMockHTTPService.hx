@@ -11,11 +11,11 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  */
 class AnotherMockHTTPService extends HTTPService<HTTPServiceConfiguration> implements ISpeedInjectorContainer
 {
-	public static var serviceCallCount 	: UInt 		= 0;
+	public static var serviceCallCount : UInt 		= 0;
 	public static var errorThrown 		: Exception = null;
 	
 	@Inject
-	public var serviceMonitor : IServiceMonitor;
+	public var serviceMonitor : IServiceMonitor<IServiceErrorStrategy<AnotherMockHTTPService>>;
 	
 	public function new() 
 	{
