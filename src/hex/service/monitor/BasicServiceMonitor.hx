@@ -13,7 +13,6 @@ import hex.util.ClassUtil;
  * ...
  * @author Francis Bourre
  */
-@:rtti
 class BasicServiceMonitor<StrategyType> extends StatefulService<ServiceConfiguration> implements IServiceMonitor<StrategyType>
 {
 	var _map : HashMap<Dynamic, Dynamic>;

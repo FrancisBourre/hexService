@@ -1,5 +1,6 @@
 package hex.service;
 
+import hex.di.ISpeedInjectorContainer;
 import hex.error.VirtualMethodException;
 import hex.event.MessageType;
 import hex.service.IService;
@@ -9,7 +10,7 @@ import hex.service.ServiceConfiguration;
  * ...
  * @author Francis Bourre
  */
-class AbstractService<ServiceConfigurationType:ServiceConfiguration> implements IService<ServiceConfigurationType>
+class AbstractService<ServiceConfigurationType:ServiceConfiguration> implements IService<ServiceConfigurationType> implements ISpeedInjectorContainer
 {
 	var _configuration : ServiceConfigurationType;
 	
