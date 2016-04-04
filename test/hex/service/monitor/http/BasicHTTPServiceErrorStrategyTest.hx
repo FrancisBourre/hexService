@@ -1,7 +1,7 @@
 package hex.service.monitor.http;
 
-import hex.di.SpeedInjector;
 import haxe.Timer;
+import hex.di.Injector;
 import hex.error.NullPointerException;
 import hex.service.monitor.IServiceErrorStrategy;
 import hex.service.stateless.http.HTTPServiceConfiguration;
@@ -30,7 +30,7 @@ class BasicHTTPServiceErrorStrategyTest
 		var serviceMonitor = new BasicServiceMonitor<IServiceErrorStrategy<MockHTTPService>>();
 		serviceMonitor.mapStrategy( MockHTTPService, new BasicHTTPServiceErrorStrategy( 3, 100 ) );
 		
-		var injector : SpeedInjector = new SpeedInjector();
+		var injector = new Injector();
 		injector.mapToValue( IServiceMonitor, serviceMonitor );
 		injector.mapToType( MockHTTPService, MockHTTPService );
 		
@@ -74,7 +74,7 @@ class BasicHTTPServiceErrorStrategyTest
 		serviceMonitor.mapStrategy( MockHTTPService, new BasicHTTPServiceErrorStrategy( 3, 100 ) );
 		serviceMonitor.mapStrategy( AnotherMockHTTPService, new BasicHTTPServiceErrorStrategy( 6, 50 ) );
 		
-		var injector : SpeedInjector = new SpeedInjector();
+		var injector = new Injector();
 		injector.mapToValue( IServiceMonitor, serviceMonitor );
 		injector.mapToType( MockHTTPService, MockHTTPService );
 		injector.mapToType( AnotherMockHTTPService, AnotherMockHTTPService );

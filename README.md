@@ -7,4 +7,4 @@ hexService contains service architecture written in Haxe
 
 * [hexCore](https://github.com/DoclerLabs/hexCore)
 * [hexAnnotation](https://github.com/DoclerLabs/hexAnnotation)
-* [hexSpeedInject](https://github.com/DoclerLabs/hexSpeedInject)
+* [hexInject](https://github.com/DoclerLabs/hexInject)
