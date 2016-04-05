@@ -90,7 +90,7 @@ class BasicHTTPServiceErrorStrategyTest
 		service.call();
 		anotherService.call();
 		
-		Timer.delay( MethodRunner.asyncHandler( this._onCompleteTestTwoStrategyRetryAtTheSameTime ), 400 );
+		Timer.delay( MethodRunner.asyncHandler( this._onCompleteTestTwoStrategyRetryAtTheSameTime ), 500 );
 		
 		#if js
 		}
