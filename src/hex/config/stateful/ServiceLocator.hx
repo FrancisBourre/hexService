@@ -114,8 +114,9 @@ class ServiceLocator extends Locator<String, ServiceLocatorHelper> implements IS
 		}
 	}
 	
-	public function addService( service : Class<IService<ServiceConfiguration>>, value : Dynamic, ?mapName : String = "" ) : Bool
+	public function addService( service : Class<Dynamic>, value : Dynamic, ?mapName : String = "" ) : Bool
 	{
+		//TODO check 'service' class extends Class<IService<ServiceConfiguration>>
 		return this._registerService( service, new ServiceLocatorHelper( value, mapName ), mapName );
 	}
 	
@@ -124,8 +125,9 @@ class ServiceLocator extends Locator<String, ServiceLocatorHelper> implements IS
 		return this._mapping;
 	}
 	
-	function _registerService( type : Class<IService<ServiceConfiguration>>, service : ServiceLocatorHelper, ?mapName : String = "" ) : Bool
+	function _registerService( type : Class<Dynamic>, service : ServiceLocatorHelper, ?mapName : String = "" ) : Bool
 	{
+		//TODO check 'type' class extends Class<IService<ServiceConfiguration>>
 		var className : String = ( mapName != "" ? mapName + "#" : "" ) + Type.getClassName( type );
 		return this.register( className, service );
 	}
