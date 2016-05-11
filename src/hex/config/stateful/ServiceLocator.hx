@@ -17,6 +17,8 @@ import hex.service.stateful.IStatefulService;
 /**
  * ...
  * @author Francis Bourre
+ * 
+ * This class is deprecated. Use hex.ioc.di.MappingConfiguration class instead
  */
 class ServiceLocator extends Locator<String, ServiceLocatorHelper> implements IStatefulConfig
 {
