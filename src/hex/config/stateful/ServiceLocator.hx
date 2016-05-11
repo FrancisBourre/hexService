@@ -79,14 +79,7 @@ class ServiceLocator extends Locator<String, ServiceLocatorHelper> implements IS
 
 			if ( Std.is( service, Class ) )
 			{
-				if ( helper.mapName.length > 0 )
-				{
-					injector.mapToType( serviceClassKey, service, helper.mapName );
-				}
-				else
-				{
-					injector.mapToType( serviceClassKey, service );
-				}
+				injector.mapToType( serviceClassKey, service, helper.mapName );
 			}
 			else if ( Std.is( service, IStatefulService ) )
 			{
@@ -95,15 +88,8 @@ class ServiceLocator extends Locator<String, ServiceLocatorHelper> implements IS
 				{
 					serviceDispatcher.add( dispatcher );
 				}
-				
-				if ( helper.mapName.length > 0 )
-				{
-					injector.mapToValue( serviceClassKey, service, helper.mapName );
-				}
-				else
-				{
-					injector.mapToValue( serviceClassKey, service );
-				}
+
+				injector.mapToValue( serviceClassKey, service, helper.mapName );
 			}
 			else
 			{
