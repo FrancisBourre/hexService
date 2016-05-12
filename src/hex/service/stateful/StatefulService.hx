@@ -55,14 +55,14 @@ class StatefulService<ServiceConfigurationType:ServiceConfiguration> extends Abs
 		return this._inUse;
 	}
 	
-	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void 
+	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool 
 	{
-		this._dispatcher.addHandler( messageType, scope, callback );
+		return this._dispatcher.addHandler( messageType, scope, callback );
 	}
 	
-	override public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void 
+	override public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool 
 	{
-		this._dispatcher.removeHandler( messageType, scope, callback );
+		return this._dispatcher.removeHandler( messageType, scope, callback );
 	}
 	
 	override public function removeAllListeners( ):Void

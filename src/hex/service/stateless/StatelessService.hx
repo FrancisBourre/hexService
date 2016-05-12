@@ -50,14 +50,14 @@ class StatelessService<ServiceConfigurationType:ServiceConfiguration> extends Ab
 		}
 	}
 	
-	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void
+	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
 	{
-		this._ed.addHandler( messageType, scope, callback );
+		return this._ed.addHandler( messageType, scope, callback );
 	}
 
-	override public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void
+	override public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
 	{
-		this._ed.removeHandler( messageType, scope, callback );
+		return this._ed.removeHandler( messageType, scope, callback );
 	}
 	
 	override public function release() : Void

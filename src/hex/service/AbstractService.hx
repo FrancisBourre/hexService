@@ -35,12 +35,12 @@ class AbstractService<ServiceConfigurationType:ServiceConfiguration> implements 
 		throw new VirtualMethodException( this + ".setConfiguration must be overridden" );
 	}
 	
-	public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void
+	public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
 	{
 		throw new VirtualMethodException( this + ".addHandler must be overridden" );
 	}
 	
-	public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Void
+	public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
 	{
 		throw new VirtualMethodException( this + ".removeHandler must be overridden" );
 	}
