@@ -3,6 +3,7 @@ package hex.order;
 import haxe.Http;
 import hex.collection.HashMap;
 import hex.control.order.Order;
+import hex.data.IParser;
 import hex.error.NullPointerException;
 import hex.log.Stringifier;
 import hex.service.stateless.http.HTTPRequestHeader;
@@ -20,6 +21,7 @@ class HttpOrder<ResultType> extends Order<ResultType>
 	var _request 			: Http;
 	var _excludedParameters : Array<String>;
 	var _timestamp 			: Float;
+	var _parser				: IParser<ResultType>;
 
 	public function new( ?url : String ) 
 	{
@@ -44,7 +46,6 @@ class HttpOrder<ResultType> extends Order<ResultType>
 	
 	function _createRequest() : Void
 	{
-		this._request = new Http( this._configuration.serviceUrl );
 		this._request = new Http( this._configuration.serviceUrl );
 		
 		this._configuration.parameterFactory.setParameters( this._request, this._configuration.parameters, _excludedParameters );
@@ -106,10 +107,22 @@ class HttpOrder<ResultType> extends Order<ResultType>
 		this._configuration.requestHeaders.push( header );
 	}
 	
+	public function setParser( parser : IParser<ResultType> ) : Void
+	{
+		this._parser = parser;
+	}
+	
 	//
 	function _onData( result ) : Void
 	{
-		this._complete( cast result );
+		if (  this._parser != null )
+		{
+			this._complete( this._parser.parse( result ) );
+		}
+		else
+		{
+			this._complete( cast result );
+		}
 	}
 
 	function _onError( message : String ) : Void

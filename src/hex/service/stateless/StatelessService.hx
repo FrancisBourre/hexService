@@ -1,6 +1,6 @@
 package hex.service.stateless;
 
-import hex.data.IParser;
+import hex.data.ServiceParser;
 import hex.error.Exception;
 import hex.error.IllegalStateException;
 import hex.error.UnsupportedOperationException;
@@ -29,7 +29,7 @@ class StatelessService<ServiceConfigurationType:ServiceConfiguration> extends Ab
 	
 	var _result                     	: Dynamic;
     var _rawResult                		: Dynamic;
-	var _parser                    		: IParser;
+	var _parser                    		: ServiceParser;
     var _status                     	: String = StatelessService.WAS_NEVER_USED;
 	
 	function new() 
@@ -201,7 +201,7 @@ class StatelessService<ServiceConfigurationType:ServiceConfiguration> extends Ab
 		return this._rawResult;
 	}
 
-	public function setParser( parser : IParser ) : Void
+	public function setParser( parser : ServiceParser ) : Void
 	{
 		this._parser = parser;
 	}

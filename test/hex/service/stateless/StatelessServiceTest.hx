@@ -1,6 +1,6 @@
 package hex.service.stateless;
 
-import hex.data.IParser;
+import hex.data.ServiceParser;
 import hex.error.IllegalStateException;
 import hex.error.UnsupportedOperationException;
 import hex.event.MessageType;
@@ -216,14 +216,14 @@ class StatelessServiceTest
 	}
 }
 
-private class MockParser implements IParser
+private class MockParser
 {
 	public function new()
 	{
 		
 	}
 
-	public function parse( serializedContent : Dynamic, target : Dynamic = null) : Dynamic 
+	public function parse( serializedContent : Dynamic ) : Dynamic 
 	{
 		return serializedContent + 1;
 	}

@@ -1,7 +1,7 @@
 package hex.service.stateless;
 
 import hex.control.ICancellable;
-import hex.data.IParser;
+import hex.data.ServiceParser;
 import hex.service.IService;
 import hex.service.ServiceConfiguration;
 
@@ -15,7 +15,7 @@ interface IStatelessService<ServiceConfigurationType:ServiceConfiguration> exten
 
 	function getRawResult() : Dynamic;
 	
-	function setParser( parser : IParser ) : Void;
+	function setParser( parser : ServiceParser ) : Void;
 	
 	function handleComplete() : Void;
 	

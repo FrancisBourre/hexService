@@ -1,7 +1,7 @@
 package hex.service.stateless.http;
 
 import haxe.Http;
-import hex.data.IParser;
+import hex.data.ServiceParser;
 import hex.error.IllegalStateException;
 import hex.error.NullPointerException;
 import hex.event.MessageType;
@@ -368,14 +368,14 @@ class HTTPServiceTest
 	}
 }
 
-private class MockParser implements IParser
+private class MockParser
 {
 	public function new()
 	{
 		
 	}
 
-	public function parse( serializedContent : Dynamic, target : Dynamic = null) : Dynamic 
+	public function parse( serializedContent : Dynamic ) : Dynamic 
 	{
 		return serializedContent + 1;
 	}
