@@ -1,4 +1,5 @@
 package hex.service;
+
 import hex.service.ServiceConfiguration;
 
 /**
