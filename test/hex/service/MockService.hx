@@ -1,13 +1,12 @@
 package hex.service;
 
 import hex.service.AbstractService;
-import hex.service.ServiceConfiguration;
 
 /**
  * ...
  * @author Francis Bourre
  */
-class MockService extends AbstractService<ServiceConfiguration>
+class MockService extends AbstractService
 {
 	public function new()
 	{

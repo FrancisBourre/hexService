@@ -8,7 +8,7 @@ import hex.service.stateless.StatelessServiceMessage;
  * ...
  * @author Francis Bourre
  */
-class HTTPServiceErrorHelper<ServiceType:HTTPService<HTTPServiceConfiguration>>
+class HTTPServiceErrorHelper<ServiceType:HTTPService>
 {
 	var _dispatcher 	: HTTPServiceErrorHelperDispatcher;
 	var _service 		: ServiceType;

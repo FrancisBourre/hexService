@@ -10,16 +10,16 @@ import hex.service.ServiceConfiguration;
  * ...
  * @author Francis Bourre
  */
-class AbstractService<ServiceConfigurationType:ServiceConfiguration> implements IService<ServiceConfigurationType> implements IInjectorContainer
+class AbstractService implements IService implements IInjectorContainer
 {
-	var _configuration : ServiceConfigurationType;
+	var _configuration : ServiceConfiguration;
 	
 	function new() 
 	{
 		
 	}
 
-	public function getConfiguration() : ServiceConfigurationType
+	public function getConfiguration() : ServiceConfiguration
 	{
 		return this._configuration;
 	}
@@ -30,7 +30,7 @@ class AbstractService<ServiceConfigurationType:ServiceConfiguration> implements 
 		throw new VirtualMethodException( this + ".createConfiguration must be overridden" );
 	}
 	
-	public function setConfiguration( configuration : ServiceConfigurationType ) : Void
+	public function setConfiguration( configuration : ServiceConfiguration ) : Void
 	{
 		throw new VirtualMethodException( this + ".setConfiguration must be overridden" );
 	}

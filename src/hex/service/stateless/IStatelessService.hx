@@ -3,13 +3,12 @@ package hex.service.stateless;
 import hex.control.ICancellable;
 import hex.data.ServiceParser;
 import hex.service.IService;
-import hex.service.ServiceConfiguration;
 
 /**
  * @author Francis Bourre
  */
 
-interface IStatelessService<ServiceConfigurationType:ServiceConfiguration> extends IService<ServiceConfigurationType> extends ICancellable
+interface IStatelessService extends IService extends ICancellable
 {
 	function getResult() : Dynamic;
 

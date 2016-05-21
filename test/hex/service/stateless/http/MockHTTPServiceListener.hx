@@ -6,7 +6,7 @@ import hex.event.MessageType;
  * ...
  * @author Francis Bourre
  */
-class MockHTTPServiceListener implements IHTTPServiceListener<MockHTTPServiceConfiguration>
+class MockHTTPServiceListener implements IHTTPServiceListener
 {
 	public var lastMessageTypeReceived 					: MessageType;
 	public var lastServiceReceived 						: MockHTTPService;
@@ -20,25 +20,25 @@ class MockHTTPServiceListener implements IHTTPServiceListener<MockHTTPServiceCon
 		
 	}
 	
-	public function onServiceComplete( service : IHTTPService<MockHTTPServiceConfiguration> ) : Void 
+	public function onServiceComplete( service : IHTTPService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceCompleteCallCount++;
 	}
 	
-	public function onServiceFail( service : IHTTPService<MockHTTPServiceConfiguration> ) : Void 
+	public function onServiceFail( service : IHTTPService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceFailCallCount++;
 	}
 	
-	public function onServiceCancel( service : IHTTPService<MockHTTPServiceConfiguration> ) : Void 
+	public function onServiceCancel( service : IHTTPService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceCancelCallCount++;
 	}
 	
-	public function onServiceTimeout( service : IHTTPService<MockHTTPServiceConfiguration> ) : Void 
+	public function onServiceTimeout( service : IHTTPService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceTimeoutCallCount++;

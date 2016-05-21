@@ -8,7 +8,7 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  * ...
  * @author Francis Bourre
  */
-class MockHTTPService extends HTTPService<MockHTTPServiceConfiguration>
+class MockHTTPService extends HTTPService
 {
 	public function new()
 	{

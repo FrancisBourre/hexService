@@ -1,12 +1,11 @@
 package hex.config.stateful;
 
+import hex.MockDependencyInjector;
 import hex.config.stateful.ServiceLocator;
 import hex.error.IllegalArgumentException;
 import hex.error.NoSuchElementException;
 import hex.event.Dispatcher;
 import hex.event.MessageType;
-import hex.MockDependencyInjector;
-import hex.service.ServiceConfiguration;
 import hex.service.stateful.IStatefulService;
 import hex.service.stateful.StatefulService;
 import hex.service.stateless.IStatelessService;
@@ -146,7 +145,7 @@ class ServiceLocatorTest
 	}
 }
 
-private class MockStatefulService extends StatefulService<ServiceConfiguration>
+private class MockStatefulService extends StatefulService
 {
 	public function new()
 	{

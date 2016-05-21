@@ -5,7 +5,6 @@ import hex.error.Exception;
 import hex.error.IllegalArgumentException;
 import hex.log.Stringifier;
 import hex.service.Service;
-import hex.service.ServiceConfiguration;
 import hex.service.stateful.StatefulService;
 import hex.util.ClassUtil;
 
@@ -13,7 +12,7 @@ import hex.util.ClassUtil;
  * ...
  * @author Francis Bourre
  */
-class BasicServiceMonitor<StrategyType> extends StatefulService<ServiceConfiguration> implements IServiceMonitor<StrategyType>
+class BasicServiceMonitor<StrategyType> extends StatefulService implements IServiceMonitor<StrategyType>
 {
 	var _map : HashMap<Dynamic, Dynamic>;
 	

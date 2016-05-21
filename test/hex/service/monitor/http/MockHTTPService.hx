@@ -9,7 +9,7 @@ import hex.service.stateless.http.HTTPServiceConfiguration;
  * ...
  * @author Francis Bourre
  */
-class MockHTTPService extends HTTPService<HTTPServiceConfiguration>
+class MockHTTPService extends HTTPService
 {
 	public static var serviceCallCount 	: UInt 		= 0;
 	public static var errorThrown 		: Exception = null;

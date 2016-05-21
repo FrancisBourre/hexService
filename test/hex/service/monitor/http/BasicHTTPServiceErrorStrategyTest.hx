@@ -37,7 +37,7 @@ class BasicHTTPServiceErrorStrategyTest
 		MockHTTPService.serviceCallCount = 0;
 		MockHTTPService.errorThrown = null;
 		
-		var service : IHTTPService<HTTPServiceConfiguration> = injector.getOrCreateNewInstance( MockHTTPService );
+		var service : IHTTPService = injector.getOrCreateNewInstance( MockHTTPService );
 		service.call();
 		
 		Timer.delay( MethodRunner.asyncHandler( this._onCompleteTestStrategyRetry ), 400 );
@@ -85,8 +85,8 @@ class BasicHTTPServiceErrorStrategyTest
 		AnotherMockHTTPService.serviceCallCount = 0;
 		AnotherMockHTTPService.errorThrown = null;
 		
-		var service : IHTTPService<HTTPServiceConfiguration> = injector.getOrCreateNewInstance( MockHTTPService );
-		var anotherService : IHTTPService<HTTPServiceConfiguration> = injector.getOrCreateNewInstance( AnotherMockHTTPService );
+		var service : IHTTPService = injector.getOrCreateNewInstance( MockHTTPService );
+		var anotherService : IHTTPService = injector.getOrCreateNewInstance( AnotherMockHTTPService );
 		service.call();
 		anotherService.call();
 		

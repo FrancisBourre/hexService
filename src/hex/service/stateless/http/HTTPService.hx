@@ -11,7 +11,7 @@ import hex.service.stateless.AsyncStatelessService;
  * ...
  * @author Francis Bourre
  */
-class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends AsyncStatelessService<ServiceConfigurationType> implements IHTTPService<ServiceConfigurationType> implements IURLConfigurable implements IAnnotationParsable
+class HTTPService extends AsyncStatelessService implements IHTTPService implements IURLConfigurable implements IAnnotationParsable
 {
 	function new() 
 	{
@@ -26,7 +26,7 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 	{
 		this._timestamp = Date.now().getTime ();
 		
-		if ( this._configuration == null || this._configuration.serviceUrl == null )
+		if ( this._configuration == null || ( cast this._configuration ).serviceUrl == null )
 		{
 			this._status = StatelessService.IS_RUNNING;
 			this._onException( new NullPointerException( "_createRequest call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
@@ -35,14 +35,14 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 		
 		this._createRequest();
 		super.call();
-		this._request.request( this._configuration.requestMethod == HTTPRequestMethod.POST );
+		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
 	}
 	
 	function _createRequest() : Void
 	{
-		this._request = new Http( this._configuration.serviceUrl );
+		this._request = new Http( ( cast this._configuration ).serviceUrl );
 		
-		this._configuration.parameterFactory.setParameters( this._request, this._configuration.parameters, _excludedParameters );
+		( cast this._configuration ).parameterFactory.setParameters( this._request, ( cast this._configuration ).parameters, _excludedParameters );
 		this.timeoutDuration = this._configuration.serviceTimeout;
 		
 		#if js
@@ -52,7 +52,7 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 		this._request.onError 		= this._onError;
 		this._request.onStatus 		= this._onStatus;
 		
-		var requestHeaders : Array<HTTPRequestHeader> = this._configuration.requestHeaders;
+		var requestHeaders : Array<HTTPRequestHeader> = ( cast this._configuration ).requestHeaders;
 		if ( requestHeaders != null )
 		{
 			for ( header in requestHeaders )
@@ -70,19 +70,19 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 	public var url( get, null ) : String;
 	public function get_url() : String
 	{
-		return this._configuration.serviceUrl;
+		return ( cast this._configuration ).serviceUrl;
 	}
 	
 	public var method( get, null ) : HTTPRequestMethod;
 	public function get_method() : HTTPRequestMethod
 	{
-		return this._configuration.requestMethod;
+		return ( cast this._configuration ).requestMethod;
 	}
 	
 	public var dataFormat( get, null ) : String;
 	public function get_dataFormat() : String
 	{
-		return this._configuration.dataFormat;
+		return ( cast this._configuration ).dataFormat;
 	}
 	
 	public var timeout( get, null ) : UInt;
@@ -110,17 +110,17 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 
 	public function setParameters( parameters : HTTPServiceParameters ) : Void
 	{
-		this._configuration.parameters = parameters;
+		( cast this._configuration ).parameters = parameters;
 	}
 
 	public function getParameters() : HTTPServiceParameters
 	{
-		return this._configuration.parameters;
+		return ( cast this._configuration ).parameters;
 	}
 
 	public function addHeader( header : HTTPRequestHeader ) : Void
 	{
-		this._configuration.requestHeaders.push( header );
+		( cast this._configuration ).requestHeaders.push( header );
 	}
 
 	override function _getRemoteArguments() : Array<Dynamic>
@@ -146,13 +146,13 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 
 	public function setURL( url : String ) : Void
 	{
-		this._configuration.serviceUrl = url;
+		( cast this._configuration ).serviceUrl = url;
 	}
 	
 	/**
      * Event handling
      */
-	public function addHTTPServiceListener( listener : IHTTPServiceListener<ServiceConfigurationType> ) : Void
+	public function addHTTPServiceListener( listener : IHTTPServiceListener ) : Void
 	{
 		this._ed.addHandler( StatelessServiceMessage.COMPLETE, listener, listener.onServiceComplete );
 		this._ed.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
@@ -160,7 +160,7 @@ class HTTPService<ServiceConfigurationType:HTTPServiceConfiguration> extends Asy
 		this._ed.addHandler( AsyncStatelessServiceMessage.TIMEOUT, listener, listener.onServiceTimeout );
 	}
 
-	public function removeHTTPServiceListener( listener : IHTTPServiceListener<ServiceConfigurationType> ) : Void
+	public function removeHTTPServiceListener( listener : IHTTPServiceListener ) : Void
 	{
 		this._ed.removeHandler( StatelessServiceMessage.COMPLETE, listener, listener.onServiceComplete );
 		this._ed.removeHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
