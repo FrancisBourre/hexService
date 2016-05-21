@@ -13,6 +13,4 @@ interface IHTTPService extends IAsyncStatelessService
 	var dataFormat( get, null ) : String;
 	var timeout( get, null ) : UInt;
 	function addHeader( header : HTTPRequestHeader ) : Void;
-	function addHTTPServiceListener( listener : IHTTPServiceListener ) : Void;
-	function removeHTTPServiceListener( listener : IHTTPServiceListener ) : Void;
 }

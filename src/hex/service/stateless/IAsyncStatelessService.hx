@@ -7,4 +7,6 @@ package hex.service.stateless;
 interface IAsyncStatelessService extends IStatelessService
 {
 	var timeoutDuration( get, set ) : UInt;
+	function addListener( listener : IAsyncStatelessServiceListener ) : Void;
+	function removeListener( listener : IAsyncStatelessServiceListener ) : Void;
 }

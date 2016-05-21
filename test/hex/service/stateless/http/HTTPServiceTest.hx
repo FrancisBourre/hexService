@@ -182,8 +182,8 @@ class HTTPServiceTest
 		var anotherHandler 	= new MockHTTPServiceListener();
 		var anotherListener = new MockHTTPServiceListener();
 		
-		this.service.addHTTPServiceListener( listener );
-		this.service.addHTTPServiceListener( anotherListener );
+		this.service.addListener( listener );
+		this.service.addListener( anotherListener );
 		this.service.addHandler( StatelessServiceMessage.CANCEL, handler, handler.onServiceCancel );
 		
 		Assert.isFalse( this.service.wasUsed, "'wasUsed' should return false" );
@@ -223,8 +223,8 @@ class HTTPServiceTest
 		var anotherHandler 	= new MockHTTPServiceListener();
 		var anotherListener = new MockHTTPServiceListener();
 		
-		this.service.addHTTPServiceListener( listener );
-		this.service.addHTTPServiceListener( anotherListener );
+		this.service.addListener( listener );
+		this.service.addListener( anotherListener );
 		this.service.addHandler( StatelessServiceMessage.COMPLETE, handler, handler.onServiceComplete );
 		
 		Assert.isFalse( this.service.wasUsed, "'wasUsed' should return false" );
@@ -263,8 +263,8 @@ class HTTPServiceTest
 		var anotherHandler 	= new MockHTTPServiceListener();
 		var anotherListener = new MockHTTPServiceListener();
 		
-		this.service.addHTTPServiceListener( listener );
-		this.service.addHTTPServiceListener( anotherListener );
+		this.service.addListener( listener );
+		this.service.addListener( anotherListener );
 		this.service.addHandler( StatelessServiceMessage.FAIL, handler, handler.onServiceFail );
 		
 		Assert.isFalse( this.service.wasUsed, "'wasUsed' should return false" );
@@ -303,8 +303,8 @@ class HTTPServiceTest
 		var anotherHandler 	= new MockHTTPServiceListener();
 		var anotherListener = new MockHTTPServiceListener();
 		
-		this.service.addHTTPServiceListener( listener );
-		this.service.addHTTPServiceListener( anotherListener );
+		this.service.addListener( listener );
+		this.service.addListener( anotherListener );
 		this.service.addHandler( AsyncStatelessServiceMessage.TIMEOUT, handler, handler.onServiceTimeout );
 		
 		Assert.isFalse( this.service.hasTimeout, "'hasTimeout' property should return false" );

@@ -3,6 +3,7 @@ package hex.service.stateless;
 import haxe.Timer;
 import hex.collection.HashMap;
 import hex.service.ServiceConfiguration;
+import hex.service.stateless.IAsyncStatelessServiceListener;
 
 /**
  * ...
@@ -68,6 +69,25 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
 		}
 		
 		super._reset();
+	}
+	
+	/**
+     * Event handling
+     */
+	public function addListener( listener : IAsyncStatelessServiceListener ) : Void
+	{
+		this._ed.addHandler( StatelessServiceMessage.COMPLETE, listener, listener.onServiceComplete );
+		this._ed.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
+		this._ed.addHandler( StatelessServiceMessage.CANCEL, listener, listener.onServiceCancel );
+		this._ed.addHandler( AsyncStatelessServiceMessage.TIMEOUT, listener, listener.onServiceTimeout );
+	}
+
+	public function removeListener( listener : IAsyncStatelessServiceListener ) : Void
+	{
+		this._ed.removeHandler( StatelessServiceMessage.COMPLETE, listener, listener.onServiceComplete );
+		this._ed.removeHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
+		this._ed.removeHandler( StatelessServiceMessage.CANCEL, listener, listener.onServiceCancel );
+		this._ed.removeHandler( AsyncStatelessServiceMessage.TIMEOUT, listener, listener.onServiceTimeout );
 	}
 	
 	/**

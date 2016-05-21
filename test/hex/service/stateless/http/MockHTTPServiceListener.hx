@@ -1,12 +1,13 @@
 package hex.service.stateless.http;
 
 import hex.event.MessageType;
+import hex.service.stateless.IAsyncStatelessServiceListener;
 
 /**
  * ...
  * @author Francis Bourre
  */
-class MockHTTPServiceListener implements IHTTPServiceListener
+class MockHTTPServiceListener implements IAsyncStatelessServiceListener
 {
 	public var lastMessageTypeReceived 					: MessageType;
 	public var lastServiceReceived 						: MockHTTPService;
@@ -20,25 +21,25 @@ class MockHTTPServiceListener implements IHTTPServiceListener
 		
 	}
 	
-	public function onServiceComplete( service : IHTTPService ) : Void 
+	public function onServiceComplete( service : IAsyncStatelessService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceCompleteCallCount++;
 	}
 	
-	public function onServiceFail( service : IHTTPService ) : Void 
+	public function onServiceFail( service : IAsyncStatelessService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceFailCallCount++;
 	}
 	
-	public function onServiceCancel( service : IHTTPService ) : Void 
+	public function onServiceCancel( service : IAsyncStatelessService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceCancelCallCount++;
 	}
 	
-	public function onServiceTimeout( service : IHTTPService ) : Void 
+	public function onServiceTimeout( service : IAsyncStatelessService ) : Void 
 	{
 		this.lastServiceReceived = cast service;
 		this.onServiceTimeoutCallCount++;
