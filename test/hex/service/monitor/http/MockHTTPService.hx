@@ -23,6 +23,11 @@ class MockHTTPService extends HTTPService<HTTPServiceConfiguration>
 		
 	}
 	
+	override public function createConfiguration():Void 
+	{
+		//
+	}
+	
 	override function _onError( msg : String ) : Void
 	{
 		var e : Exception = new MockHTTPServiceException( msg );

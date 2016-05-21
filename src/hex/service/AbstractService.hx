@@ -24,7 +24,7 @@ class AbstractService<ServiceConfigurationType:ServiceConfiguration> implements 
 		return this._configuration;
 	}
 	
-	@postConstruct
+	@PostConstruct
 	public function createConfiguration() : Void
 	{
 		throw new VirtualMethodException( this + ".createConfiguration must be overridden" );
