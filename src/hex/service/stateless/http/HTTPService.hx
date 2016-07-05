@@ -93,18 +93,20 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 
 	override public function release() : Void
 	{
+		#if !php
 		if ( this._request != null )
 		{
 			if ( this._status == StatelessService.WAS_NEVER_USED )
 			{
 				this._request.cancel();
 			}
-
+			
 			/*this._request.onData 	= null;
 			this._request.onError 	= null;
 			this._request.onStatus 	= null;*/
 		}
-
+		#end
+		
 		super.release();
 	}
 
