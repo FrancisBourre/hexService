@@ -61,6 +61,7 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		//
 		
 		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
+		trace( "this._status:", this.wasUsed, this.isRunning, this._status );
 	}
 
 	public function setExcludedParameters( excludedParameters : Array<String> ) : Void
