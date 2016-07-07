@@ -128,12 +128,12 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	}
 
 	function _onData( result : String ) : Void
-	{
+	{trace("_onData:", result );
 		this._onResultHandler( result );
 	}
 
 	function _onError( msg : String ) : Void
-	{
+	{trace("_onError:", msg );
 		this._onException( new Exception( msg ) );
 	}
 	

@@ -104,7 +104,7 @@ class HTTPServiceTest
 		trace( "this.service.isRunning", this.service.isRunning );
 
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
-		trace( "this.service.isRunning:", this.service.isRunning );
+		trace( "this.service.isRunning:", this.service.isRunning, this.service.hasCompleted, this.service.isCancelled, this.service.hasFailed, this.service.hasTimeout );
 		Assert.isTrue( this.service.isRunning, "'isRunning' should return true" );
 		Assert.isFalse( this.service.hasCompleted, "'hasCompleted' should return false" );
 		Assert.isFalse( this.service.isCancelled, "'isCancelled' should return false" );
