@@ -2,13 +2,11 @@ package;
 
 import hex.HexServiceSuite;
 import hex.unittest.runner.ExMachinaUnitCore;
-import hex.unittest.runner.TestRunner;
-
-#if flash
-import flash.Lib;
 import hex.unittest.notifier.TraceNotifier;
-#else
+#if js
 import hex.unittest.notifier.ConsoleNotifier;
+#elseif flash
+import flash.Lib;
 #end
 
 /**
@@ -23,8 +21,10 @@ class MainServiceTest
         
 		#if flash
 		emu.addListener( new TraceNotifier( Lib.current.loaderInfo ) );
-		#else
+		#elseif js
 		emu.addListener( new ConsoleNotifier( false ) );
+		#else
+		emu.addListener( new TraceNotifier( false ) );
 		#end
 		
         emu.addTest( HexServiceSuite );
