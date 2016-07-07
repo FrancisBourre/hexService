@@ -99,17 +99,25 @@ class HTTPServiceTest
 		if ( Browser.supported )
 		{
 		#end
-		trace("CALL");
+		
 		this.service.call();
-		trace( "this.service.isRunning", this.service.isRunning );
-
+		
+		//Result is synchronous with php target
+		#if php
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
-		trace( "this.service.isRunning:", this.service.isRunning, this.service.hasCompleted, this.service.isCancelled, this.service.hasFailed, this.service.hasTimeout );
+		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
+		Assert.isTrue( this.service.hasCompleted, "'hasCompleted' should return true" );
+		Assert.isFalse( this.service.isCancelled, "'isCancelled' should return false" );
+		Assert.isFalse( this.service.hasFailed, "'hasFailed' property should return false" );
+		Assert.isFalse( this.service.hasTimeout, "'hasTimeout' should return false" );
+		#else
+		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
 		Assert.isTrue( this.service.isRunning, "'isRunning' should return true" );
 		Assert.isFalse( this.service.hasCompleted, "'hasCompleted' should return false" );
 		Assert.isFalse( this.service.isCancelled, "'isCancelled' should return false" );
 		Assert.isFalse( this.service.hasFailed, "'hasFailed' property should return false" );
 		Assert.isFalse( this.service.hasTimeout, "'hasTimeout' should return false" );
+		#end
 		
 		Assert.methodCallThrows( IllegalStateException, this.service, this.service.call, [], "service called twice should throw IllegalStateException" );
 		
@@ -341,11 +349,22 @@ class HTTPServiceTest
 		
 		this.service.call();
 		
+		//Result is synchronous with php target
+		#if php
+		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
+		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
+		Assert.isTrue( this.service.hasCompleted, "'hasCompleted' should return true" );
+		Assert.isFalse( this.service.isCancelled, "'isCancelled' should return false" );
+		Assert.isFalse( this.service.hasFailed, "'hasFailed' property should return false" );
+		Assert.isFalse( this.service.hasTimeout, "'hasTimeout' should return false" );
+		#else
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
 		Assert.isTrue( this.service.isRunning, "'isRunning' should return true" );
 		Assert.isFalse( this.service.hasCompleted, "'hasCompleted' should return false" );
 		Assert.isFalse( this.service.isCancelled, "'isCancelled' should return false" );
+		Assert.isFalse( this.service.hasFailed, "'hasFailed' property should return false" );
 		Assert.isFalse( this.service.hasTimeout, "'hasTimeout' should return false" );
+		#end
 		
 		service.call_reset();
 		

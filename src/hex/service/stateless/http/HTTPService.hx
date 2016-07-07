@@ -34,9 +34,9 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		}
 		
 		this.timeoutDuration = this._configuration.serviceTimeout;
-		trace( "Before:super.call();", this.wasUsed, this.isRunning, this._status );
+
 		super.call();
-		trace( "this._status", this.wasUsed, this.isRunning, this._status );
+
 		//
 		this._request = new Http( ( cast this._configuration ).serviceUrl );
 		
@@ -61,7 +61,6 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		//
 		
 		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
-		trace( "this._status:", this.wasUsed, this.isRunning, this._status );
 	}
 
 	public function setExcludedParameters( excludedParameters : Array<String> ) : Void
@@ -128,12 +127,12 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	}
 
 	function _onData( result : String ) : Void
-	{trace("_onData:", result );
+	{
 		this._onResultHandler( result );
 	}
 
 	function _onError( msg : String ) : Void
-	{trace("_onError:", msg );
+	{
 		this._onException( new Exception( msg ) );
 	}
 	
