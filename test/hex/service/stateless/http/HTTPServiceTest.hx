@@ -99,7 +99,7 @@ class HTTPServiceTest
 		if ( Browser.supported )
 		{
 		#end
-		trace("CALL");
+
 		service.call();
 
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
@@ -327,12 +327,6 @@ class HTTPServiceTest
 		#if js
 		}
 		#end
-	}
-	
-	@Test( "Test _getRemoteArguments call without override" )
-    public function test_getRemoteArgumentsCall() : Void
-    {
-		Assert.isInstanceOf( this.service.call_getRemoteArguments()[0], Http, "'_getRemoteArguments' call should return an array with HTTP instance" );
 	}
 	
 	@Test( "Test _reset call" )

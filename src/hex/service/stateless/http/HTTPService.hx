@@ -28,23 +28,19 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		
 		if ( this._configuration == null || ( cast this._configuration ).serviceUrl == null )
 		{
-			trace("NULL configuration");
 			this._status = StatelessService.IS_RUNNING;
 			this._onException( new NullPointerException( "_createRequest call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
 			return;
 		}
 		
-		this._createRequest();
+		this.timeoutDuration = this._configuration.serviceTimeout;
 		super.call();
-		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
-	}
-	
-	function _createRequest() : Void
-	{
+		
+		//
 		this._request = new Http( ( cast this._configuration ).serviceUrl );
 		
 		( cast this._configuration ).parameterFactory.setParameters( this._request, ( cast this._configuration ).parameters, _excludedParameters );
-		this.timeoutDuration = this._configuration.serviceTimeout;
+		
 		
 		#if js
 			this._request.async 		= true; //TODO: check with flash
@@ -61,6 +57,9 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 				this._request.addHeader ( header.name, header.value );
 			}
 		}
+		//
+		
+		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
 	}
 
 	public function setExcludedParameters( excludedParameters : Array<String> ) : Void
@@ -124,12 +123,6 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	public function addHeader( header : HTTPRequestHeader ) : Void
 	{
 		( cast this._configuration ).requestHeaders.push( header );
-	}
-
-	override function _getRemoteArguments() : Array<Dynamic>
-	{
-		this._createRequest();
-		return [ this._request ];
 	}
 
 	function _onData( result : String ) : Void

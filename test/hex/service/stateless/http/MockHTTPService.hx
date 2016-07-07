@@ -19,7 +19,6 @@ class MockHTTPService extends HTTPService
 	override public function createConfiguration() : Void
 	{
 		this._configuration = new MockHTTPServiceConfiguration();
-		trace("createConfiguration", this._configuration);
 	}
 	
 	public function call_getRemoteArguments() : Array<Dynamic> 
