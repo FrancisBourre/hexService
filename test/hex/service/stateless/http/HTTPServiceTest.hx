@@ -1,11 +1,8 @@
 package hex.service.stateless.http;
 
 import haxe.Http;
-import hex.data.ServiceParser;
 import hex.error.IllegalStateException;
 import hex.error.NullPointerException;
-import hex.event.MessageType;
-import hex.service.stateless.http.HTTPServiceConfiguration;
 import hex.unittest.assertion.Assert;
 
 #if js
