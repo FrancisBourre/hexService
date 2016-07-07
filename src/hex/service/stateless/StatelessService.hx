@@ -76,7 +76,6 @@ class StatelessService extends AbstractService implements IStatelessService
 	{
 		this.wasUsed && this._throwExecutionIllegalStateError( "call" );
 		this._status = StatelessService.IS_RUNNING;
-		trace( "this._status", this._status );
 	}
 
 	public function cancel() : Void

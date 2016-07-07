@@ -25,10 +25,10 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	override public function call() : Void
 	{
 		this._timestamp = Date.now().getTime ();
-		trace( "this._configuration", this._configuration );
-		trace( "( cast this._configuration ).serviceUrl", ( cast this._configuration ).serviceUrl );
+		
 		if ( this._configuration == null || ( cast this._configuration ).serviceUrl == null )
 		{
+			trace("NULL configuration");
 			this._status = StatelessService.IS_RUNNING;
 			this._onException( new NullPointerException( "_createRequest call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
 			return;
