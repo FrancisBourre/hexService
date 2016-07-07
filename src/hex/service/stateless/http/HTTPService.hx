@@ -34,8 +34,9 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		}
 		
 		this.timeoutDuration = this._configuration.serviceTimeout;
+		trace( "Before:super.call();", this.wasUsed, this.isRunning, this._status );
 		super.call();
-		
+		trace( "this._status", this.wasUsed, this.isRunning, this._status );
 		//
 		this._request = new Http( ( cast this._configuration ).serviceUrl );
 		

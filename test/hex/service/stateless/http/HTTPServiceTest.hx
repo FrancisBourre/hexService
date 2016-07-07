@@ -99,7 +99,7 @@ class HTTPServiceTest
 		if ( Browser.supported )
 		{
 		#end
-
+		trace("CALL");
 		service.call();
 
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
