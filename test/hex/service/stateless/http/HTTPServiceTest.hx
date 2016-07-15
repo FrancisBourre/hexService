@@ -103,7 +103,7 @@ class HTTPServiceTest
 		this.service.call();
 		
 		//Result is synchronous with php target
-		#if php
+		#if ( php || neko )
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
 		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
 		Assert.isTrue( this.service.hasCompleted, "'hasCompleted' should return true" );
@@ -350,7 +350,7 @@ class HTTPServiceTest
 		this.service.call();
 		
 		//Result is synchronous with php target
-		#if php
+		#if ( php || neko )
 		Assert.isTrue( this.service.wasUsed, "'wasUsed' should return true" );
 		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
 		Assert.isTrue( this.service.hasCompleted, "'hasCompleted' should return true" );
