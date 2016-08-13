@@ -13,7 +13,8 @@ interface IHTTPService extends IAsyncStatelessService
 	var method( get, null ) : HTTPRequestMethod;
 	var dataFormat( get, null ) : String;
 	var timeout( get, null ) : UInt;
-	
-	function addHeader( header : HTTPRequestHeader ) : Void;
 	function setParameters( parameters : HTTPServiceParameters ) : Void;
+	function getParameters() : HTTPServiceParameters;
+	function addHeader( header : HTTPRequestHeader ) : Void;
+	function setURL( url : String ) : Void;
 }
