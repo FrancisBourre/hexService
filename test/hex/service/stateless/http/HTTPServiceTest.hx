@@ -387,7 +387,7 @@ private class MockParser
 		
 	}
 
-	public function parse( serializedContent : Dynamic ) : Dynamic 
+	public function parse( serializedContent : Dynamic, target : Dynamic = null ) : Dynamic 
 	{
 		return serializedContent + 1;
 	}
