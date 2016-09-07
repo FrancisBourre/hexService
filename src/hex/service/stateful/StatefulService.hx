@@ -1,8 +1,8 @@
 package hex.service.stateful;
 
 import hex.error.IllegalStateException;
+import hex.event.ClosureDispatcher;
 import hex.event.CompositeDispatcher;
-import hex.event.Dispatcher;
 import hex.event.MessageType;
 import hex.service.AbstractService;
 import hex.service.ServiceConfiguration;
@@ -14,7 +14,7 @@ import hex.service.stateful.IStatefulService;
  */
 class StatefulService extends AbstractService implements IStatefulService
 {
-	var _dispatcher				: Dispatcher<{}>;
+	var _dispatcher				: ClosureDispatcher;
 	var _compositeDispatcher	: CompositeDispatcher;
 	
 	var _inUse 					: Bool = false;
@@ -24,7 +24,7 @@ class StatefulService extends AbstractService implements IStatefulService
 		super();
 		
 		this._compositeDispatcher 	= new CompositeDispatcher();
-		this._dispatcher 			= new Dispatcher<{}>();
+		this._dispatcher 			= new ClosureDispatcher();
 		
 		this._compositeDispatcher.add( this._dispatcher );
 	}
@@ -55,14 +55,14 @@ class StatefulService extends AbstractService implements IStatefulService
 		return this._inUse;
 	}
 	
-	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool 
+	override public function addHandler( messageType : MessageType, callback : Dynamic ) : Bool 
 	{
-		return this._dispatcher.addHandler( messageType, scope, callback );
+		return this._dispatcher.addHandler( messageType, callback );
 	}
 	
-	override public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool 
+	override public function removeHandler( messageType : MessageType, callback : Dynamic ) : Bool 
 	{
-		return this._dispatcher.removeHandler( messageType, scope, callback );
+		return this._dispatcher.removeHandler( messageType, callback );
 	}
 	
 	override public function removeAllListeners( ):Void

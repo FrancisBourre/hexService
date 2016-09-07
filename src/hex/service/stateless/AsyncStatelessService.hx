@@ -76,18 +76,18 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
      */
 	public function addListener( listener : IAsyncStatelessServiceListener ) : Void
 	{
-		this._ed.addHandler( StatelessServiceMessage.COMPLETE, listener, listener.onServiceComplete );
-		this._ed.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
-		this._ed.addHandler( StatelessServiceMessage.CANCEL, listener, listener.onServiceCancel );
-		this._ed.addHandler( AsyncStatelessServiceMessage.TIMEOUT, listener, listener.onServiceTimeout );
+		this._ed.addHandler( StatelessServiceMessage.COMPLETE, listener.onServiceComplete );
+		this._ed.addHandler( StatelessServiceMessage.FAIL, listener.onServiceFail );
+		this._ed.addHandler( StatelessServiceMessage.CANCEL, listener.onServiceCancel );
+		this._ed.addHandler( AsyncStatelessServiceMessage.TIMEOUT, listener.onServiceTimeout );
 	}
 
 	public function removeListener( listener : IAsyncStatelessServiceListener ) : Void
 	{
-		this._ed.removeHandler( StatelessServiceMessage.COMPLETE, listener, listener.onServiceComplete );
-		this._ed.removeHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
-		this._ed.removeHandler( StatelessServiceMessage.CANCEL, listener, listener.onServiceCancel );
-		this._ed.removeHandler( AsyncStatelessServiceMessage.TIMEOUT, listener, listener.onServiceTimeout );
+		this._ed.removeHandler( StatelessServiceMessage.COMPLETE, listener.onServiceComplete );
+		this._ed.removeHandler( StatelessServiceMessage.FAIL, listener.onServiceFail );
+		this._ed.removeHandler( StatelessServiceMessage.CANCEL, listener.onServiceCancel );
+		this._ed.removeHandler( AsyncStatelessServiceMessage.TIMEOUT, listener.onServiceTimeout );
 	}
 	
 	/**

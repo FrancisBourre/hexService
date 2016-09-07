@@ -77,7 +77,7 @@ class HTTPServiceErrorHelper<ServiceType:HTTPService>
 	{
 		if ( !this._service.hasCompleted )
 		{
-			this._service.addHandler( StatelessServiceMessage.COMPLETE, this, this._onServiceComplete );
+			this._service.addHandler( StatelessServiceMessage.COMPLETE, this._onServiceComplete );
 			this._service.call();
 		}
 		else
