@@ -142,7 +142,7 @@ class HTTPServiceTest
 		Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without serviceUrl should throw 'NullPointerException'" );
 		
 		var service = new MockHTTPService();
-		service.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
+		service.addHandler( StatelessServiceMessage.FAIL, listener.onServiceFail );
 		service.call();
 		Assert.isTrue( service.hasFailed, "service call without configuration should fail" );
 		Assert.equals( 1, listener.onServiceFailCallCount, "" );
@@ -151,7 +151,7 @@ class HTTPServiceTest
 		
 		
 		service = new MockHTTPService();
-		service.addHandler( StatelessServiceMessage.FAIL, listener, listener.onServiceFail );
+		service.addHandler( StatelessServiceMessage.FAIL, listener.onServiceFail );
 		service.setConfiguration( configuration );
 		service.call();
 		Assert.isTrue( service.hasFailed, "service call without serviceUrl should fail" );
@@ -191,7 +191,7 @@ class HTTPServiceTest
 		
 		this.service.addListener( listener );
 		this.service.addListener( anotherListener );
-		this.service.addHandler( StatelessServiceMessage.CANCEL, handler, handler.onServiceCancel );
+		this.service.addHandler( StatelessServiceMessage.CANCEL, handler.onServiceCancel );
 		
 		Assert.isFalse( this.service.wasUsed, "'wasUsed' should return false" );
 		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
@@ -218,7 +218,7 @@ class HTTPServiceTest
 		Assert.equals( this.service, listener.lastServiceReceived, "service received by listener should be HTTPService instance" );
 		Assert.equals( this.service, handler.lastServiceReceived, "service received by handler should be HTTPService instance" );
 		
-		service.addHandler( StatelessServiceMessage.CANCEL, anotherHandler, anotherHandler.onServiceCancel );
+		service.addHandler( StatelessServiceMessage.CANCEL, anotherHandler.onServiceCancel );
 		Assert.equals( 0, anotherHandler.onServiceCancelCallCount, "'post-handler' callback should not be triggered" );
     }
 	
@@ -232,7 +232,7 @@ class HTTPServiceTest
 		
 		this.service.addListener( listener );
 		this.service.addListener( anotherListener );
-		this.service.addHandler( StatelessServiceMessage.COMPLETE, handler, handler.onServiceComplete );
+		this.service.addHandler( StatelessServiceMessage.COMPLETE, handler.onServiceComplete );
 		
 		Assert.isFalse( this.service.wasUsed, "'wasUsed' should return false" );
 		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
@@ -258,7 +258,7 @@ class HTTPServiceTest
 		Assert.equals( this.service, listener.lastServiceReceived, "service received by listener should be HTTPService instance" );
 		Assert.equals( this.service, handler.lastServiceReceived, "service received by handler should be HTTPService instance" );
 		
-		service.addHandler( StatelessServiceMessage.COMPLETE, anotherHandler, anotherHandler.onServiceComplete );
+		service.addHandler( StatelessServiceMessage.COMPLETE, anotherHandler.onServiceComplete );
 		Assert.equals( 0, anotherHandler.onServiceCompleteCallCount, "'post-handler' callback should not be triggered" );
     }
 	
@@ -272,7 +272,7 @@ class HTTPServiceTest
 		
 		this.service.addListener( listener );
 		this.service.addListener( anotherListener );
-		this.service.addHandler( StatelessServiceMessage.FAIL, handler, handler.onServiceFail );
+		this.service.addHandler( StatelessServiceMessage.FAIL, handler.onServiceFail );
 		
 		Assert.isFalse( this.service.wasUsed, "'wasUsed' should return false" );
 		Assert.isFalse( this.service.isRunning, "'isRunning' should return false" );
@@ -298,7 +298,7 @@ class HTTPServiceTest
 		Assert.equals( this.service, listener.lastServiceReceived, "'event.target' received by listener should be HTTPService instance" );
 		Assert.equals( this.service, handler.lastServiceReceived, "'event.target' received by handler should be HTTPService instance" );
 		
-		this.service.addHandler( StatelessServiceMessage.FAIL, anotherHandler, anotherHandler.onServiceFail );
+		this.service.addHandler( StatelessServiceMessage.FAIL, anotherHandler.onServiceFail );
 		Assert.equals( 0, anotherHandler.onServiceFailCallCount, "'post-handler' callback should not be triggered" );
     }
 	
@@ -312,7 +312,7 @@ class HTTPServiceTest
 		
 		this.service.addListener( listener );
 		this.service.addListener( anotherListener );
-		this.service.addHandler( AsyncStatelessServiceMessage.TIMEOUT, handler, handler.onServiceTimeout );
+		this.service.addHandler( AsyncStatelessServiceMessage.TIMEOUT, handler.onServiceTimeout );
 		
 		Assert.isFalse( this.service.hasTimeout, "'hasTimeout' property should return false" );
 		this.service.timeoutDuration = 0;
@@ -331,7 +331,7 @@ class HTTPServiceTest
 		Assert.equals( this.service, listener.lastServiceReceived, "'event.target' received by listener should be HTTPService instance" );
 		Assert.equals( this.service, handler.lastServiceReceived, "'event.target' received by handler should be HTTPService instance" );
 		
-		this.service.addHandler( AsyncStatelessServiceMessage.TIMEOUT, anotherHandler, anotherHandler.onServiceTimeout );
+		this.service.addHandler( AsyncStatelessServiceMessage.TIMEOUT, anotherHandler.onServiceTimeout );
 		Assert.equals( 0, anotherHandler.onServiceTimeoutCallCount, "'post-handler' callback should not be triggered" );
 		
 		#if js

@@ -61,13 +61,13 @@ class StatefulServiceTest
 	{
 		var listener = new MockAsyncEventListener();
 		
-		this.service.addHandler( MockMessage.ON_SAMPLE, listener, listener.onAddHandlerSuccess );
+		this.service.addHandler( MockMessage.ON_SAMPLE, listener.onAddHandlerSuccess );
 		this.service.getDispatcher().dispatch( MockMessage.ON_SAMPLE, [ "test" ] );
 		
 		Assert.equals( 1, listener.addHandlerSuccessCount, "dispatch should happen after call dispatchEvent on service" );
 		Assert.equals( "test", listener.lastDataReceived, "dispatched event should be equal to the imput" );
 		
-		this.service.removeHandler( MockMessage.ON_SAMPLE, listener, listener.onAddHandlerSuccess );
+		this.service.removeHandler( MockMessage.ON_SAMPLE, listener.onAddHandlerSuccess );
 		this.service.getDispatcher().dispatch( MockMessage.ON_SAMPLE, [ "test" ] );
 		
 		Assert.equals( 1, listener.addHandlerSuccessCount, "dispatch should not happen after call removeHandler" );
@@ -78,7 +78,7 @@ class StatefulServiceTest
 	{
 		var listener = new MockAsyncEventListener();
 		
-		this.service.addHandler( MockMessage.ON_SAMPLE, listener, listener.onAddHandlerSuccess );
+		this.service.addHandler( MockMessage.ON_SAMPLE, listener.onAddHandlerSuccess );
 		this.service.getDispatcher().dispatch( MockMessage.ON_SAMPLE, [ "test" ] );
 		
 		Assert.equals( 1, listener.addHandlerSuccessCount, "dispatch should happen after call dispatchEvent on service" );

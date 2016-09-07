@@ -4,8 +4,7 @@ import hex.data.ServiceParser;
 import hex.error.Exception;
 import hex.error.IllegalStateException;
 import hex.error.UnsupportedOperationException;
-import hex.event.Dispatcher;
-import hex.event.IDispatcher;
+import hex.event.ClosureDispatcher;
 import hex.event.MessageType;
 import hex.log.Stringifier;
 import hex.service.AbstractService;
@@ -25,7 +24,7 @@ class StatelessService extends AbstractService implements IStatelessService
     public static inline var IS_FAILED          : String = "IS_FAILED";
     public static inline var IS_CANCELLED       : String = "IS_CANCELLED";
 	
-	var _ed            					: IDispatcher<{}>;
+	var _ed            					: ClosureDispatcher;
 	
 	var _result                     	: Dynamic;
     var _rawResult                		: Dynamic;
@@ -35,7 +34,7 @@ class StatelessService extends AbstractService implements IStatelessService
 	function new() 
 	{
 		super();
-		this._ed = new Dispatcher<{}>();
+		this._ed = new ClosureDispatcher();
 	}
 
 	override public function setConfiguration( configuration : ServiceConfiguration ) : Void
@@ -50,14 +49,14 @@ class StatelessService extends AbstractService implements IStatelessService
 		}
 	}
 	
-	override public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
+	override public function addHandler( messageType : MessageType, callback : Dynamic ) : Bool
 	{
-		return this._ed.addHandler( messageType, scope, callback );
+		return this._ed.addHandler( messageType, callback );
 	}
 
-	override public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
+	override public function removeHandler( messageType : MessageType, callback : Dynamic ) : Bool
 	{
-		return this._ed.removeHandler( messageType, scope, callback );
+		return this._ed.removeHandler( messageType, callback );
 	}
 	
 	override public function release() : Void

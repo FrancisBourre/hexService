@@ -35,12 +35,12 @@ class AbstractService implements IService implements IInjectorContainer
 		throw new VirtualMethodException( this + ".setConfiguration must be overridden" );
 	}
 	
-	public function addHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
+	public function addHandler( messageType : MessageType, callback : Dynamic ) : Bool
 	{
 		throw new VirtualMethodException( this + ".addHandler must be overridden" );
 	}
 	
-	public function removeHandler( messageType : MessageType, scope : Dynamic, callback : Dynamic ) : Bool
+	public function removeHandler( messageType : MessageType, callback : Dynamic ) : Bool
 	{
 		throw new VirtualMethodException( this + ".removeHandler must be overridden" );
 	}
