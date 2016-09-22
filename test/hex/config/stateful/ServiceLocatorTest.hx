@@ -145,19 +145,6 @@ class ServiceLocatorTest
 	}
 }
 
-private class MockStatefulService extends StatefulService
-{
-	public function new()
-	{
-		super();
-	}
-	
-	public function dispatch( messageType : MessageType, data : Array<Dynamic> ) : Void
-	{
-		this._compositeDispatcher.dispatch( messageType, data );
-	}
-}
-
 private class MockInjectorForMapToTypeTest extends MockDependencyInjector
 {
 	public var clazz	: Class<Dynamic>;

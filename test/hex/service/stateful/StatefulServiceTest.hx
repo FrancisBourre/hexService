@@ -92,26 +92,6 @@ class StatefulServiceTest
 	
 }
 
-private class MockStatefulService extends StatefulService
-{
-	public function new() 
-	{
-		super();
-		
-	}
-	
-	public function run()
-	{
-		this._lock();
-	}
-	
-	public function stop()
-	{
-		this._release();
-	}
-}
-
-
 private class MockMessage
 {
 	public static var ON_SAMPLE = new MessageType( "onSample" );

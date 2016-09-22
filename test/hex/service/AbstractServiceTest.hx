@@ -33,16 +33,3 @@ class AbstractServiceTest
 		Assert.methodCallThrows( VirtualMethodException, service, service.release, [], "'method' release should throw an exception" );
 	}
 }
-
-private class MockServiceWithConfigurationSetter extends MockService
-{
-	public function new()
-	{
-		super();
-	}
-	
-	override public function setConfiguration( configuration : ServiceConfiguration ) : Void
-	{
-		this._configuration = configuration;
-	}
-}
