@@ -11,6 +11,11 @@ class HTTPServiceConfiguration extends ServiceURLConfiguration
 	public var parameters	            : HTTPServiceParameters;
 	public var requestHeaders           : Array<HTTPRequestHeader>;
 	public var parameterFactory         : IHTTPServiceParameterFactory;
+	
+	#if js
+	public var async					: Bool = true;
+	public var withCredentials			: Bool	= false;
+	#end
 		
 	public function new( url : String = null, method : HTTPRequestMethod = HTTPRequestMethod.GET, dataFormat : String = "text", timeout : UInt = 5000 ) 
 	{
