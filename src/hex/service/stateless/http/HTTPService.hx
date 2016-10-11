@@ -43,8 +43,9 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		( cast this._configuration ).parameterFactory.setParameters( this._request, ( cast this._configuration ).parameters, _excludedParameters );
 		
 		
-		#if js
-			this._request.async 		= true; //TODO: check with flash
+		#if (js && !nodejs)
+			this._request.async 					= ( cast this._configuration ).async;
+			untyped this._request.withCredentials 	= ( cast this._configuration ).withCredentials;
 		#end
 		this._request.onData 		= this._onData;
 		this._request.onError 		= this._onError;
@@ -101,10 +102,6 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 			{
 				this._request.cancel();
 			}
-			
-			/*this._request.onData 	= null;
-			this._request.onError 	= null;
-			this._request.onStatus 	= null;*/
 		}
 		#end
 		
