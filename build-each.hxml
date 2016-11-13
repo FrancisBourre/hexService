@@ -2,7 +2,9 @@
 -cp src
 -cp test
 -cp hexcore/src
--cp hexcore/test
+-cp hexreflection/src
+-cp hexreflection/test
+-cp hexreflect/test
 -cp hexannotation/src
 -cp hexannotation/test
 -cp hexinject/src
