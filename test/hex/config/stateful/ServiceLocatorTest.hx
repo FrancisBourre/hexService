@@ -1,6 +1,5 @@
 package hex.config.stateful;
 
-import hex.MockDependencyInjector;
 import hex.config.stateful.ServiceLocator;
 import hex.error.IllegalArgumentException;
 import hex.error.NoSuchElementException;
