@@ -31,7 +31,7 @@ class BasicHTTPServiceErrorStrategyTest
 		serviceMonitor.mapStrategy( MockHTTPService, new BasicHTTPServiceErrorStrategy( 3, 100 ) );
 		
 		var injector = new Injector();
-		injector.mapToValue( IServiceMonitor, serviceMonitor );
+		injector.mapClassName( "hex.service.monitor.IServiceMonitor<hex.service.monitor.IServiceErrorStrategy<hex.service.monitor.http.MockHTTPService>>" ).toValue( serviceMonitor );
 		injector.mapToType( MockHTTPService, MockHTTPService );
 		
 		MockHTTPService.serviceCallCount = 0;
@@ -75,7 +75,8 @@ class BasicHTTPServiceErrorStrategyTest
 		serviceMonitor.mapStrategy( AnotherMockHTTPService, new BasicHTTPServiceErrorStrategy( 6, 50 ) );
 		
 		var injector = new Injector();
-		injector.mapToValue( IServiceMonitor, serviceMonitor );
+		injector.mapClassName( "hex.service.monitor.IServiceMonitor<hex.service.monitor.IServiceErrorStrategy<hex.service.monitor.http.MockHTTPService>>" ).toValue( serviceMonitor );
+		injector.mapClassName( "hex.service.monitor.IServiceMonitor<hex.service.monitor.IServiceErrorStrategy<hex.service.monitor.http.AnotherMockHTTPService>>" ).toValue( serviceMonitor );
 		injector.mapToType( MockHTTPService, MockHTTPService );
 		injector.mapToType( AnotherMockHTTPService, AnotherMockHTTPService );
 		
