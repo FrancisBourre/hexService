@@ -1,5 +1,6 @@
 package hex.service.monitor.http;
 
+#if (!neko || haxe_ver >= "3.3")
 import hex.collection.HashMap;
 import hex.error.Exception;
 import hex.service.stateless.http.HTTPService;
@@ -61,3 +62,4 @@ class BasicHTTPServiceErrorStrategy<ServiceType:HTTPService> implements IService
 		return helper;
 	}
 }
+#end

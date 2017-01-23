@@ -1,5 +1,6 @@
 package hex.service.monitor.http;
 
+#if (!neko || haxe_ver >= "3.3")
 import haxe.Timer;
 import hex.di.Injector;
 import hex.error.NullPointerException;
@@ -111,3 +112,4 @@ class BasicHTTPServiceErrorStrategyTest
 		Assert.isInstanceOf( AnotherMockHTTPService.errorThrown, NullPointerException, "Error thrown after retries should be an instance of 'NullPointerException'" );
 	}
 }
+#end
