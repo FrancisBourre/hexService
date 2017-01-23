@@ -1,6 +1,8 @@
 package hex.service.stateless;
-import hex.service.stateless.http.HTTPSuite;
 
+#if (!neko || haxe_ver >= "3.3")
+import hex.service.stateless.http.HTTPSuite;
+#end
 /**
  * ...
  * @author Francis Bourre
@@ -8,5 +10,9 @@ import hex.service.stateless.http.HTTPSuite;
 class MVCStatelessServiceSuite
 {
 	@Suite("Stateless")
-    public var list : Array<Class<Dynamic>> = [AsyncStatelessServiceTest, HTTPSuite, StatelessServiceTest];
+    public var list : Array<Class<Dynamic>> = [AsyncStatelessServiceTest, 
+	#if (!neko || haxe_ver >= "3.3")
+	HTTPSuite, 
+	#end
+	StatelessServiceTest];
 }
