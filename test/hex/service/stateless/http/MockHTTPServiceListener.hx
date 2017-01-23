@@ -1,5 +1,6 @@
 package hex.service.stateless.http;
 
+#if (!neko || haxe_ver >= "3.3")
 import hex.event.MessageType;
 import hex.service.stateless.IAsyncStatelessServiceListener;
 
@@ -51,3 +52,4 @@ class MockHTTPServiceListener implements IAsyncStatelessServiceListener
 		this.lastServiceReceived 		= service;
 	}
 }
+#end

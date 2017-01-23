@@ -1,5 +1,6 @@
 package hex.service.stateless.http;
 
+#if (!neko || haxe_ver >= "3.3")
 import haxe.Timer;
 import hex.model.ModelDispatcher;
 import hex.service.stateless.StatelessServiceMessage;
@@ -104,3 +105,4 @@ class HTTPServiceErrorHelperDispatcher extends ModelDispatcher<IHTTPServiceError
 		
 	}
 }
+#end

@@ -1,5 +1,6 @@
 package hex.service.monitor.http;
 
+#if (!neko || haxe_ver >= "3.3")
 import hex.error.Exception;
 import hex.service.monitor.IServiceErrorStrategy;
 import hex.service.stateless.http.HTTPService;
@@ -66,3 +67,4 @@ class MockHTTPService extends HTTPService
 		}
 	}
 }
+#end

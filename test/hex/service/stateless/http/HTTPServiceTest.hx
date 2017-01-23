@@ -1,5 +1,6 @@
 package hex.service.stateless.http;
 
+#if (!neko || haxe_ver >= "3.3")
 import haxe.Http;
 import hex.error.IllegalStateException;
 import hex.error.NullPointerException;
@@ -392,4 +393,4 @@ private class MockParser
 		return serializedContent + 1;
 	}
 }
-
+#end
