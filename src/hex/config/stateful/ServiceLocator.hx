@@ -2,7 +2,6 @@ package hex.config.stateful;
 
 import hex.collection.HashMap;
 import hex.collection.Locator;
-import hex.collection.LocatorMessage;
 import hex.config.stateful.IStatefulConfig;
 import hex.di.IDependencyInjector;
 import hex.error.IllegalArgumentException;
@@ -11,7 +10,6 @@ import hex.event.CompositeDispatcher;
 import hex.event.IDispatcher;
 import hex.module.IModule;
 import hex.service.IService;
-import hex.service.ServiceConfiguration;
 import hex.service.stateful.IStatefulService;
 
 /**
@@ -118,16 +116,6 @@ class ServiceLocator extends Locator<String, ServiceLocatorHelper> implements IS
 		//TODO check 'type' class extends Class<IService<ServiceConfiguration>>
 		var className : String = ( mapName != "" ? mapName + "#" : "" ) + Type.getClassName( type );
 		return this.register( className, service );
-	}
-	
-	override function _dispatchRegisterEvent( key : String, element : ServiceLocatorHelper ) : Void 
-	{
-		this._dispatcher.dispatch( LocatorMessage.REGISTER, [ key, element ] );
-	}
-	
-	override function _dispatchUnregisterEvent( key : String ) : Void 
-	{
-		this._dispatcher.dispatch( LocatorMessage.UNREGISTER, [ key ] );
 	}
 }
 
