@@ -27,31 +27,31 @@ class AbstractService implements IService implements IInjectorContainer
 	@PostConstruct
 	public function createConfiguration() : Void
 	{
-		throw new VirtualMethodException( this + ".createConfiguration must be overridden" );
+		throw new VirtualMethodException();
 	}
 	
 	public function setConfiguration( configuration : ServiceConfiguration ) : Void
 	{
-		throw new VirtualMethodException( this + ".setConfiguration must be overridden" );
+		throw new VirtualMethodException();
 	}
 	
 	public function addHandler( messageType : MessageType, callback : Dynamic ) : Bool
 	{
-		throw new VirtualMethodException( this + ".addHandler must be overridden" );
+		throw new VirtualMethodException();
 	}
 	
 	public function removeHandler( messageType : MessageType, callback : Dynamic ) : Bool
 	{
-		throw new VirtualMethodException( this + ".removeHandler must be overridden" );
+		throw new VirtualMethodException();
 	}
 	
 	public function removeAllListeners( ):Void
 	{
-		throw new VirtualMethodException( this + ".removeAllListeners must be overridden" );
+		throw new VirtualMethodException();
 	}
 	
 	public function release() : Void
 	{
-		throw new VirtualMethodException( this + ".release must be overridden" );
+		throw new VirtualMethodException();
 	}
 }
