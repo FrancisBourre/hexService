@@ -1,5 +1,6 @@
 package hex.di.mapping;
 
+import hex.config.stateful.MockDependencyInjector;
 import hex.config.stateful.MockStatefulService;
 import hex.di.mapping.MappingConfiguration;
 import hex.event.Dispatcher;
