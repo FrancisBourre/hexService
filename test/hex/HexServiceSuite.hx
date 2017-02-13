@@ -1,6 +1,7 @@
 package hex;
 
-import hex.config.stateful.ServiceLocatorTest;
+import hex.di.mapping.MappingConfigurationTest;
+import hex.di.mapping.MappingConfigurationWithServiceTest;
 import hex.service.ServiceServiceSuite;
 
 /**
@@ -10,5 +11,5 @@ import hex.service.ServiceServiceSuite;
 class HexServiceSuite
 {
 	@Suite( "HexService" )
-    public var list : Array<Class<Dynamic>> = [ ServiceLocatorTest, ServiceServiceSuite ];
+    public var list : Array<Class<Dynamic>> = [ MappingConfigurationWithServiceTest, ServiceServiceSuite ];
 }
