@@ -30,7 +30,7 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		if ( this._configuration == null || ( cast this._configuration ).serviceUrl == null )
 		{
 			this._status = StatelessService.IS_RUNNING;
-			this._onException( new NullPointerException( "_createRequest call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
+			this._onException( new NullPointerException( "call method call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
 			return;
 		}
 		
