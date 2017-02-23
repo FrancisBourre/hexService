@@ -5,7 +5,7 @@ import haxe.Http;
 import hex.core.IAnnotationParsable;
 import hex.error.Exception;
 import hex.error.NullPointerException;
-import hex.log.Stringifier;
+import hex.util.Stringifier;
 import hex.service.stateless.AsyncStatelessService;
 
 /**

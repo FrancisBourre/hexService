@@ -6,7 +6,7 @@ import hex.error.IllegalStateException;
 import hex.error.UnsupportedOperationException;
 import hex.event.ClosureDispatcher;
 import hex.event.MessageType;
-import hex.log.Stringifier;
+import hex.util.Stringifier;
 import hex.service.AbstractService;
 import hex.service.ServiceConfiguration;
 import hex.service.stateless.IStatelessService;
