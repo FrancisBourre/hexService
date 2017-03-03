@@ -1,6 +1,5 @@
 package hex;
 
-import hex.di.mapping.MappingConfigurationTest;
 import hex.di.mapping.MappingConfigurationWithServiceTest;
 import hex.service.ServiceServiceSuite;
 
