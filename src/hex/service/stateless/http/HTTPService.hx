@@ -1,4 +1,6 @@
 package hex.service.stateless.http;
+import hex.control.async.AsyncCallback;
+import hex.control.async.Handler;
 
 #if (!neko || haxe_ver >= "3.3")
 import haxe.Http;
@@ -64,6 +66,26 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		
 		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
 	}
+	
+	public function execute<ResultType>() : AsyncCallback<ResultType>
+	{
+		return AsyncCallback.get
+		(
+			function ( handler : Handler<ResultType> )
+			{
+				try
+				{
+					this.addHandler( StatelessServiceMessage.COMPLETE, function (service) handler(Result.DONE(service.getResult())) );
+					this.addHandler( StatelessServiceMessage.FAIL, function (service) handler(Result.FAILED(new Exception('HttpService call fails'))) );
+					this.call();
+				}
+				catch ( e : Exception )
+				{
+					handler( Result.FAILED( e ) );
+				}
+			}
+		);
+	}
 
 	public function setExcludedParameters( excludedParameters : Array<String> ) : Void
 	{
@@ -92,21 +114,6 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	public function get_timeout() : UInt
 	{
 		return this._configuration.serviceTimeout;
-	}
-
-	override public function release() : Void
-	{
-		#if (js || flash)
-		if ( this._request != null )
-		{
-			if ( this._status == StatelessService.WAS_NEVER_USED )
-			{
-				this._request.cancel();
-			}
-		}
-		#end
-		
-		super.release();
 	}
 
 	public function setParameters( parameters : HTTPServiceParameters ) : Void
