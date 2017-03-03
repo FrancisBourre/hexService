@@ -1,4 +1,7 @@
 package hex.service.stateless.http;
+import hex.control.async.AsyncCallback;
+import hex.error.Exception;
+import hex.unittest.runner.MethodRunner;
 
 #if (!neko || haxe_ver >= "3.3")
 import haxe.Http;
@@ -127,6 +130,46 @@ class HTTPServiceTest
 		#end
 	}
 	
+	@Async( "test execute" )
+	public function testExecute() : Void
+	{
+		var service = new MockGithubService();
+		
+		Assert.isFalse( service.wasUsed, "'wasUsed' should return false" );
+		Assert.isFalse( service.isRunning, "'isRunning' should return false" );
+		Assert.isFalse( service.hasCompleted, "'hasCompleted' should return false" );
+		Assert.isFalse( service.isCancelled, "'isCancelled' should return false" );
+		Assert.isFalse( service.hasFailed, "'hasFailed' property should return false" );
+		Assert.isFalse( service.hasTimeout, "'hasTimeout' should return false" );
+		
+		#if js
+		if ( Browser.supported )
+		{
+		#end
+		
+		service.createConfiguration();
+		var acb = service.execute();
+		acb.onComplete( MethodRunner.asyncHandler( this._onTestExecuteComplete, [ service, acb ] ) );
+
+		#if js
+		}
+		#end
+	}
+	
+	function _onTestExecuteComplete( result : String, service : HTTPService, acb : AsyncCallback<String> ) : Void
+	{
+		Assert.isTrue( service.wasUsed, "'wasUsed' should return true" );
+		Assert.isFalse( service.isRunning, "'isRunning' should return false" );
+		Assert.isTrue( service.hasCompleted, "'hasCompleted' should return true" );
+		Assert.isFalse( service.isCancelled, "'isCancelled' should return false" );
+		Assert.isFalse( service.hasFailed, "'hasFailed' property should return false" );
+		Assert.isFalse( service.hasTimeout, "'hasTimeout' should return false" );
+		
+		var error : Exception = null;
+		service.execute().onFail( function( e ) {error = e;} );
+		Assert.isInstanceOf( error, IllegalStateException, "service called twice should throw IllegalStateException" );
+	}
+	
 	@Test( "test error thrown with service call" )
 	public function testErrorThrownWithServiceCall() : Void
 	{
@@ -147,9 +190,6 @@ class HTTPServiceTest
 		service.call();
 		Assert.isTrue( service.hasFailed, "service call without configuration should fail" );
 		Assert.equals( 1, listener.onServiceFailCallCount, "" );
-		//Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without configuration should throw 'NullPointerException'" );
-		
-		
 		
 		service = new MockHTTPService();
 		service.addHandler( StatelessServiceMessage.FAIL, listener.onServiceFail );
@@ -157,7 +197,6 @@ class HTTPServiceTest
 		service.call();
 		Assert.isTrue( service.hasFailed, "service call without serviceUrl should fail" );
 		Assert.equals( 2, listener.onServiceFailCallCount, "" );
-		//Assert.methodCallThrows( NullPointerException, service, service.call, [], "service call without serviceUrl should throw 'NullPointerException'" );
 	}
 	
 	@Test( "test release" )
