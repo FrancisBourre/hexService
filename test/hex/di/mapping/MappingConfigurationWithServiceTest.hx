@@ -37,7 +37,7 @@ class MappingConfigurationWithServiceTest
 		var injector = new MockInjectorForMapToTypeTest();
 		this._mappingConfiguration.configure( injector, null, null );
 		
-		Assert.equals( IStatelessService, injector.clazz, "injector should map the class" );
+		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service instance" );
 		Assert.equals( "", injector.name, "injector should map the service name" );
 	}
@@ -49,7 +49,7 @@ class MappingConfigurationWithServiceTest
 		var injector = new MockInjectorForMapToTypeTest();
 		this._mappingConfiguration.configure( injector, null, null );
 		
-		Assert.equals( IStatelessService, injector.clazz, "injector should map the service class" );
+		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the service class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service type" );
 		Assert.equals( "myServiceName", injector.name, "injector should map the service name" );
 	}
@@ -61,7 +61,7 @@ class MappingConfigurationWithServiceTest
 		var injector = new MockInjectorForMapAsSingletonTest();
 		this._mappingConfiguration.configure( injector, null, null );
 		
-		Assert.equals( IStatelessService, injector.clazz, "injector should map the service class" );
+		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the service class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service type" );
 		Assert.equals( "", injector.name, "injector should map the service name" );
 	}
@@ -106,7 +106,7 @@ class MappingConfigurationWithServiceTest
 		var injector = new MockInjectorForMapAsSingletonTest();
 		this._mappingConfiguration.configure( injector, null, null );
 		
-		Assert.equals( IStatelessService, injector.clazz, "injector should map the service class" );
+		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the service class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service type" );
 		Assert.equals( "myServiceName", injector.name, "injector should map the service name" );
 	}
@@ -121,7 +121,7 @@ class MappingConfigurationWithServiceTest
 		var injector = new MockInjectorForMapToValueTest();
 		this._mappingConfiguration.configure( injector, dispatcher, null );
 		
-		Assert.equals( IStatefulService, injector.clazz, "injector should map the class" );
+		Assert.equals( 'hex.service.stateful.IStatefulService', injector.className, "injector should map the class" );
 		Assert.equals( statefulService, injector.value, "injector should map the service instance" );
 		Assert.equals( "", injector.name, "injector should map the service name" );
 		
@@ -130,8 +130,8 @@ class MappingConfigurationWithServiceTest
 		dispatcher.addHandler( mt, listener, listener.onTest );
 		statefulService.dispatch( mt, [statefulService] );
 		
-		Assert.equals( statefulService, listener.lastDataReceived, "event should be received by sub-dispatcher listener" );
-		Assert.equals( 1, listener.eventReceivedCount, "event should be received by sub-dispatcher listener once" );
+		Assert.isNull( listener.lastDataReceived, "event should not be received by sub-dispatcher listener" );
+		Assert.equals( 0, listener.eventReceivedCount, "event should not be received by sub-dispatcher listener once" );
 	}
 	
 	@Test( "Test configure with stateful service named" )
@@ -144,7 +144,7 @@ class MappingConfigurationWithServiceTest
 		var injector = new MockInjectorForMapToValueTest();
 		this._mappingConfiguration.configure( injector, dispatcher, null );
 		
-		Assert.equals( IStatefulService, injector.clazz, "injector should map the class" );
+		Assert.equals( 'hex.service.stateful.IStatefulService', injector.className, "injector should map the class" );
 		Assert.equals( statefulService, injector.value, "injector should map the service instance" );
 		Assert.equals( "myServiceName", injector.name, "injector should map the service name" );
 		
@@ -154,16 +154,17 @@ class MappingConfigurationWithServiceTest
 
 		statefulService.dispatch( mt, [statefulService] );
 		
-		Assert.equals( statefulService, listener.lastDataReceived, "event should be received by sub-dispatcher listener" );
-		Assert.equals( 1, listener.eventReceivedCount, "event should be received by sub-dispatcher listener once" );
+		Assert.isNull( listener.lastDataReceived, "event should not be received by sub-dispatcher listener" );
+		Assert.equals( 0, listener.eventReceivedCount, "event should not be received by sub-dispatcher listener once" );
 	}
 }
 
 private class MockInjectorForMapAsSingletonTest extends MockDependencyInjector
 {
-	public var clazz	: Class<Dynamic>;
-	public var type		: Class<Dynamic>;
-	public var name		: String;
+	public var className	: String;
+	public var clazz		: Class<Dynamic>;
+	public var type			: Class<Dynamic>;
+	public var name			: String;
 	
 	override public function mapToSingleton( clazz : Class<Dynamic>, type : Class<Dynamic>, name : String = '' ) : Void 
 	{
@@ -171,13 +172,21 @@ private class MockInjectorForMapAsSingletonTest extends MockDependencyInjector
 		this.type 	= type;
 		this.name 	= name;
 	}
+	
+	override public function mapClassNameToSingleton( className : String, type : Class<Dynamic>, name:String = '' ) : Void
+	{
+		this.className 	= className;
+		this.type 		= type;
+		this.name 		= name;
+	}
 }
 
 private class MockInjectorForMapToTypeTest extends MockDependencyInjector
 {
-	public var clazz	: Class<Dynamic>;
-	public var type		: Class<Dynamic>;
-	public var name		: String;
+	public var className	: String;
+	public var clazz		: Class<Dynamic>;
+	public var type			: Class<Dynamic>;
+	public var name			: String;
 	
 	override public function mapToType( clazz : Class<Dynamic>, type : Class<Dynamic>, name : String = '' ) : Void 
 	{
@@ -185,19 +194,34 @@ private class MockInjectorForMapToTypeTest extends MockDependencyInjector
 		this.type 	= type;
 		this.name 	= name;
 	}
+	
+	override public function mapClassNameToType( className : String, type : Class<Dynamic>, name:String = '' ) : Void
+	{
+		this.className 	= className;
+		this.type 		= type;
+		this.name 		= name;
+	}
 }
 
 private class MockInjectorForMapToValueTest extends MockDependencyInjector
 {
-	public var clazz	: Class<Dynamic>;
-	public var value	: Dynamic;
-	public var name		: String;
+	public var className	: String;
+	public var clazz		: Class<Dynamic>;
+	public var value		: Dynamic;
+	public var name			: String;
 	
 	override public function mapToValue( clazz : Class<Dynamic>, value : Dynamic, ?name : String = '' ) : Void 
 	{
 		this.clazz 	= clazz;
 		this.value 	= value;
 		this.name 	= name;
+	}
+	
+	override public function mapClassNameToValue( className : String, value : Dynamic, ?name : String = '' ) : Void
+	{
+		this.className 	= className;
+		this.value 		= value;
+		this.name 		= name;
 	}
 }
 

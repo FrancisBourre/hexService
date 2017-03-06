@@ -3,7 +3,7 @@ package hex.service.monitor;
 import hex.collection.HashMap;
 import hex.error.Exception;
 import hex.error.IllegalArgumentException;
-import hex.log.Stringifier;
+import hex.util.Stringifier;
 import hex.service.Service;
 import hex.service.stateful.StatefulService;
 import hex.util.ClassUtil;
