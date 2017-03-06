@@ -130,8 +130,8 @@ class MappingConfigurationWithServiceTest
 		dispatcher.addHandler( mt, listener, listener.onTest );
 		statefulService.dispatch( mt, [statefulService] );
 		
-		Assert.equals( statefulService, listener.lastDataReceived, "event should be received by sub-dispatcher listener" );
-		Assert.equals( 1, listener.eventReceivedCount, "event should be received by sub-dispatcher listener once" );
+		Assert.isNull( listener.lastDataReceived, "event should not be received by sub-dispatcher listener" );
+		Assert.equals( 0, listener.eventReceivedCount, "event should not be received by sub-dispatcher listener once" );
 	}
 	
 	@Test( "Test configure with stateful service named" )
@@ -154,8 +154,8 @@ class MappingConfigurationWithServiceTest
 
 		statefulService.dispatch( mt, [statefulService] );
 		
-		Assert.equals( statefulService, listener.lastDataReceived, "event should be received by sub-dispatcher listener" );
-		Assert.equals( 1, listener.eventReceivedCount, "event should be received by sub-dispatcher listener once" );
+		Assert.isNull( listener.lastDataReceived, "event should not be received by sub-dispatcher listener" );
+		Assert.equals( 0, listener.eventReceivedCount, "event should not be received by sub-dispatcher listener once" );
 	}
 }
 
