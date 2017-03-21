@@ -1,6 +1,5 @@
 package hex.service.stateless.http;
 
-#if (!neko || haxe_ver >= "3.3")
 import hex.service.stateless.http.HTTPService;
 
 /**
@@ -20,4 +19,3 @@ class MockGithubService extends HTTPService
 		this._configuration = new MockHTTPServiceConfiguration();
 	}
 }
-#end

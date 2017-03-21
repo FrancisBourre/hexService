@@ -1,6 +1,5 @@
 package hex.service.stateless;
 
-#if (!neko || haxe_ver >= "3.3")
 import hex.service.stateless.AsyncStatelessService;
 
 /**
@@ -29,4 +28,3 @@ class MockAsyncStatelessService extends AsyncStatelessService
 		this._setResult( result );
 	}
 }
-#end

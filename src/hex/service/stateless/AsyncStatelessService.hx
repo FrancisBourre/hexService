@@ -1,6 +1,5 @@
 package hex.service.stateless;
 
-#if (!neko || haxe_ver >= "3.3")
 import haxe.Timer;
 import hex.collection.HashMap;
 import hex.service.ServiceConfiguration;
@@ -150,4 +149,3 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
 		AsyncStatelessService._releaseService( this );
 	}
 }
-#end
