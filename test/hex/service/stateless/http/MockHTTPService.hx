@@ -1,9 +1,6 @@
 package hex.service.stateless.http;
 
-#if (!neko || haxe_ver >= "3.3")
-import hex.service.ServiceConfiguration;
 import hex.service.stateless.http.HTTPService;
-import hex.service.stateless.http.HTTPServiceConfiguration;
 
 /**
  * ...
@@ -37,4 +34,3 @@ class MockHTTPService extends HTTPService
 		this._setResult( result );
 	}
 }
-#end

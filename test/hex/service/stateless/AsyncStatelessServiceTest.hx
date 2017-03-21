@@ -1,7 +1,5 @@
 package hex.service.stateless;
 
-#if (!neko || haxe_ver >= "3.3")
-import hex.data.ServiceParser;
 import hex.error.IllegalStateException;
 import hex.error.UnsupportedOperationException;
 import hex.event.MessageType;
@@ -328,4 +326,3 @@ private class MockStatelessServiceListener
 		this.lastServiceReceived 		= service;
 	}
 }
-#end

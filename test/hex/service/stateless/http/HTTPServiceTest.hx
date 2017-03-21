@@ -1,13 +1,12 @@
 package hex.service.stateless.http;
+
+import haxe.Http;
 import hex.control.async.AsyncCallback;
 import hex.error.Exception;
-import hex.unittest.runner.MethodRunner;
-
-#if (!neko || haxe_ver >= "3.3")
-import haxe.Http;
 import hex.error.IllegalStateException;
 import hex.error.NullPointerException;
 import hex.unittest.assertion.Assert;
+import hex.unittest.runner.MethodRunner;
 
 #if js
 import js.Browser;
@@ -432,4 +431,3 @@ private class MockParser
 		return serializedContent + 1;
 	}
 }
-#end

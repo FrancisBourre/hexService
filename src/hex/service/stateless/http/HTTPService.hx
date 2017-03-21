@@ -1,9 +1,8 @@
 package hex.service.stateless.http;
+
+import haxe.Http;
 import hex.control.async.AsyncCallback;
 import hex.control.async.Handler;
-
-#if (!neko || haxe_ver >= "3.3")
-import haxe.Http;
 import hex.core.IAnnotationParsable;
 import hex.error.Exception;
 import hex.error.NullPointerException;
@@ -151,4 +150,3 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		( cast this._configuration ).serviceUrl = url;
 	}
 }
-#end
