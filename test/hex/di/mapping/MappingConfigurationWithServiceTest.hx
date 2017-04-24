@@ -35,7 +35,7 @@ class MappingConfigurationWithServiceTest
     {
 		this._mappingConfiguration.addMapping( IStatelessService, MockStatelessService );
 		var injector = new MockInjectorForMapToTypeTest();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service instance" );
@@ -47,7 +47,7 @@ class MappingConfigurationWithServiceTest
     {
 		this._mappingConfiguration.addMapping( IStatelessService, MockStatelessService, "myServiceName" );
 		var injector = new MockInjectorForMapToTypeTest();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the service class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service type" );
@@ -59,7 +59,7 @@ class MappingConfigurationWithServiceTest
     {
 		this._mappingConfiguration.addMapping( IStatelessService, MockStatelessService, null, true );
 		var injector = new MockInjectorForMapAsSingletonTest();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the service class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service type" );
@@ -72,7 +72,7 @@ class MappingConfigurationWithServiceTest
 		var statefulService = new MockStatefulService();
 		this._mappingConfiguration.addMapping( IStatefulService, statefulService, false, true );
 		var injector = new MockInjectorForInjectInto();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( statefulService, injector.target, "injector should map the service type" );
 	}
@@ -83,7 +83,7 @@ class MappingConfigurationWithServiceTest
 		var statefulService = new MockStatefulService();
 		this._mappingConfiguration.addMapping( IStatefulService, statefulService, false, false );
 		var injector = new MockInjectorForInjectInto();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.isNull( injector.target, "injector should map the service type" );
 	}
@@ -94,7 +94,7 @@ class MappingConfigurationWithServiceTest
 		var statefulService = new MockStatefulService();
 		this._mappingConfiguration.addMapping( IStatefulService, statefulService );
 		var injector = new MockInjectorForInjectInto();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.isNull( injector.target, "injector should map the service type" );
 	}
@@ -104,7 +104,7 @@ class MappingConfigurationWithServiceTest
     {
 		this._mappingConfiguration.addMapping( IStatelessService, MockStatelessService, "myServiceName", true );
 		var injector = new MockInjectorForMapAsSingletonTest();
-		this._mappingConfiguration.configure( injector, null, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( 'hex.service.stateless.IStatelessService', injector.className, "injector should map the service class" );
 		Assert.equals( injector.type, MockStatelessService, "injector should map the service type" );
@@ -119,7 +119,7 @@ class MappingConfigurationWithServiceTest
 		var statefulService = new MockStatefulService();
 		this._mappingConfiguration.addMapping( IStatefulService, statefulService );
 		var injector = new MockInjectorForMapToValueTest();
-		this._mappingConfiguration.configure( injector, dispatcher, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( 'hex.service.stateful.IStatefulService', injector.className, "injector should map the class" );
 		Assert.equals( statefulService, injector.value, "injector should map the service instance" );
@@ -142,7 +142,7 @@ class MappingConfigurationWithServiceTest
 		var statefulService = new MockStatefulService();
 		this._mappingConfiguration.addMapping( IStatefulService, statefulService, "myServiceName" );
 		var injector = new MockInjectorForMapToValueTest();
-		this._mappingConfiguration.configure( injector, dispatcher, null );
+		this._mappingConfiguration.configure( injector, null );
 		
 		Assert.equals( 'hex.service.stateful.IStatefulService', injector.className, "injector should map the class" );
 		Assert.equals( statefulService, injector.value, "injector should map the service instance" );
