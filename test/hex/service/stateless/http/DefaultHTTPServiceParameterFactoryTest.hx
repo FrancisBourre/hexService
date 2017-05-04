@@ -1,7 +1,7 @@
 package hex.service.stateless.http;
-import haxe.ds.HashMap;
-import haxe.ds.StringMap;
+
 import haxe.Http;
+import haxe.ds.StringMap;
 import hex.unittest.assertion.Assert;
 
 /**
