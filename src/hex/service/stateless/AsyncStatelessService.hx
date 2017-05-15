@@ -1,7 +1,7 @@
 package hex.service.stateless;
 
 import haxe.Timer;
-import hex.collection.HashMap;
+import hex.collection.ArrayMap;
 import hex.service.ServiceConfiguration;
 import hex.service.stateless.IAsyncStatelessServiceListener;
 
@@ -93,7 +93,7 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
 	/**
      * Memory handling
      */
-    static var _POOL = new HashMap<Dynamic, Bool>();
+    static var _POOL = new ArrayMap<Any, Bool>();
 
     static function _isServiceDetained( service : Dynamic ) : Bool
     {

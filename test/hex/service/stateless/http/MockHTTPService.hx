@@ -13,7 +13,6 @@ class MockHTTPService extends HTTPService
 		super();
 	}
 	
-	@postConstruct
 	override public function createConfiguration() : Void
 	{
 		this._configuration = new MockHTTPServiceConfiguration();
