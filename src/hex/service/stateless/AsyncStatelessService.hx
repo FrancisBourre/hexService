@@ -19,7 +19,7 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
 	function new() 
 	{
 		super();
-		this._timeoutDuration = 100;
+		this._timeoutDuration = 10000;
 	}
 
 	override public function call() : Void
@@ -37,14 +37,14 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
 	
 	@:final 
 	public var hasTimeout( get, null ) : Bool;
-    public function get_hasTimeout() : Bool
+    function get_hasTimeout() : Bool
     {
         return this._status == AsyncStatelessService.HAS_TIMEOUT;
     }
 	
 	@:isVar
 	public var timeoutDuration( get, set ) : UInt;
-	public function get_timeoutDuration() : UInt
+	function get_timeoutDuration() : UInt
 	{
 		return this._timeoutDuration;
 	}

@@ -68,7 +68,7 @@ class HTTPServiceTest
 	@Test( "Test timeoutDuration accessors" )
     public function testTimeoutDurationAccessors() : Void
     {
-		Assert.equals( 100, service.timeoutDuration, "'serviceTimeout' value should be 100" );
+		Assert.equals( 10000, service.timeoutDuration, "'serviceTimeout' value should be 10000" );
 		this.service.timeoutDuration = 200;
 		Assert.equals( 200, service.timeoutDuration, "'serviceTimeout' value should be 200" );
 		
