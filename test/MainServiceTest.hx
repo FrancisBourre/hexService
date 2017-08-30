@@ -20,6 +20,7 @@ class MainServiceTest
 		#else
 		emu.addListener( new hex.unittest.notifier.ConsoleNotifier( ) );
 		#end
+		emu.addListener( new hex.unittest.notifier.ExitingNotifier( ) );
 		
         emu.addTest( HexServiceSuite );
         emu.run();
