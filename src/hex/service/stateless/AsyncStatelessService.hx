@@ -35,8 +35,8 @@ class AsyncStatelessService extends StatelessService implements IAsyncStatelessS
 		this.timeoutDuration = this._configuration.serviceTimeout;
 	}
 	
-	@:final 
 	public var hasTimeout( get, null ) : Bool;
+	@:final 
     function get_hasTimeout() : Bool
     {
         return this._status == AsyncStatelessService.HAS_TIMEOUT;
