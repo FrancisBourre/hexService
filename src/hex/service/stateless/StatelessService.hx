@@ -82,36 +82,36 @@ class StatelessService extends AbstractService implements IStatelessService
 		this.handleCancel();
 	}
 	
-	@:final 
 	public var wasUsed( get, null ) : Bool;
+	@:final 
     public function get_wasUsed() : Bool
     {
         return this._status != StatelessService.WAS_NEVER_USED;
     }
 
-	@:final 
 	public var isRunning( get, null ) : Bool;
+	@:final 
     public function get_isRunning() : Bool
     {
         return this._status == StatelessService.IS_RUNNING;
     }
 
-	@:final 
 	public var hasCompleted( get, null ) : Bool;
+	@:final 
     public function get_hasCompleted() : Bool
     {
         return this._status == StatelessService.IS_COMPLETED;
     }
 
-	@:final 
 	public var hasFailed( get, null ) : Bool;
+	@:final 
     public function get_hasFailed() : Bool
     {
         return this._status == StatelessService.IS_FAILED;
     }
 
-	@:final 
 	public var isCancelled( get, null ) : Bool;
+	@:final 
     public function get_isCancelled() : Bool
     {
         return this._status == StatelessService.IS_CANCELLED;
