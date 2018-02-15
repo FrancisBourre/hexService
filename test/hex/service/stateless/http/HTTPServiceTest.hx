@@ -148,7 +148,9 @@ class HTTPServiceTest
 		
 		service.createConfiguration();
 		var acb = service.execute();
-		acb.onComplete( MethodRunner.asyncHandler( this._onTestExecuteComplete, [ service, acb ] ) );
+		acb.onComplete( function( result : String ) 
+							MethodRunner.asyncHandler( function() this._onTestExecuteComplete( result, service, acb ) ) 
+								);
 
 		#if js
 		}
