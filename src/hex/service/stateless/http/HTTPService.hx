@@ -23,12 +23,13 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	var _request 			: Http;
 	var _excludedParameters : Array<String>;
 	var _timestamp 			: Float;
-
+	var httpConfig(get, never):HTTPServiceConfiguration;
+	inline function get_httpConfig() return (cast this._configuration:HTTPServiceConfiguration);
 	override public function call() : Void
 	{
 		this._timestamp = Date.now().getTime ();
 		
-		if ( this._configuration == null || ( cast this._configuration ).serviceUrl == null )
+		if ( this._configuration == null || httpConfig.serviceUrl == null )
 		{
 			this._status = StatelessService.IS_RUNNING;
 			this._onException( new NullPointerException( "call method call failed. ServiceConfiguration.serviceUrl shouldn't be null @" + Stringifier.stringify( this ) ) );
@@ -40,20 +41,20 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		super.call();
 
 		//
-		this._request = new Http( ( cast this._configuration ).serviceUrl );
+		this._request = new Http( httpConfig.serviceUrl );
 		
-		( cast this._configuration ).parameterFactory.setParameters( this._request, ( cast this._configuration ).parameters, _excludedParameters );
+		httpConfig.parameterFactory.setParameters( this._request, httpConfig.parameters, _excludedParameters );
 		
 		
 		#if (js && !nodejs)
-			this._request.async 					= ( cast this._configuration ).async;
-			untyped this._request.withCredentials 	= ( cast this._configuration ).withCredentials;
+			this._request.async 					= httpConfig.async;
+			untyped this._request.withCredentials 	= httpConfig.withCredentials;
 		#end
 		this._request.onData 		= this._onData;
 		this._request.onError 		= this._onError;
 		this._request.onStatus 		= this._onStatus;
 		
-		var requestHeaders : Array<HTTPRequestHeader> = ( cast this._configuration ).requestHeaders;
+		var requestHeaders : Array<HTTPRequestHeader> = httpConfig.requestHeaders;
 		if ( requestHeaders != null )
 		{
 			for ( header in requestHeaders )
@@ -63,7 +64,7 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 		}
 		//
 		
-		this._request.request( ( cast this._configuration ).requestMethod == HTTPRequestMethod.POST );
+		this._request.request( httpConfig.requestMethod == HTTPRequestMethod.POST );
 	}
 	
 	public function execute<ResultType>() : AsyncCallback<ResultType>
@@ -94,19 +95,19 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 	public var url( get, null ) : String;
 	public function get_url() : String
 	{
-		return ( cast this._configuration ).serviceUrl;
+		return httpConfig.serviceUrl;
 	}
 	
 	public var method( get, null ) : HTTPRequestMethod;
 	public function get_method() : HTTPRequestMethod
 	{
-		return ( cast this._configuration ).requestMethod;
+		return httpConfig.requestMethod;
 	}
 	
 	public var dataFormat( get, null ) : String;
 	public function get_dataFormat() : String
 	{
-		return ( cast this._configuration ).dataFormat;
+		return httpConfig.dataFormat;
 	}
 	
 	public var timeout( get, null ) : UInt;
@@ -117,17 +118,17 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 
 	public function setParameters( parameters : HTTPServiceParameters ) : Void
 	{
-		( cast this._configuration ).parameters = parameters;
+		httpConfig.parameters = parameters;
 	}
 
 	public function getParameters() : HTTPServiceParameters
 	{
-		return ( cast this._configuration ).parameters;
+		return httpConfig.parameters;
 	}
 
 	public function addHeader( header : HTTPRequestHeader ) : Void
 	{
-		( cast this._configuration ).requestHeaders.push( header );
+		httpConfig.requestHeaders.push( header );
 	}
 
 	function _onData( result : String ) : Void
@@ -147,6 +148,6 @@ class HTTPService extends AsyncStatelessService implements IHTTPService implemen
 
 	public function setURL( url : String ) : Void
 	{
-		( cast this._configuration ).serviceUrl = url;
+		httpConfig.serviceUrl = url;
 	}
 }
