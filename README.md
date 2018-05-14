@@ -1,12 +1,4 @@
-# hexService [![TravisCI Build Status](https://travis-ci.org/DoclerLabs/hexService.svg?branch=master)](https://travis-ci.org/DoclerLabs/hexService)
+# Abandoned
+Since 1.0.0, hexMachina focuses on IoC and Dependency Injection and stop to cover all previous features.
 
-hexService contains service architecture written in Haxe
-
-*Find more information about hexMachina on [hexmachina.org](http://hexmachina.org/)*
-
-## Dependencies
-
-* [hexCore](https://github.com/DoclerLabs/hexCore)
-* [hexReflection](https://github.com/DoclerLabs/hexReflection)
-* [hexAnnotation](https://github.com/DoclerLabs/hexAnnotation)
-* [hexInject](https://github.com/DoclerLabs/hexInject)
+For this reason **HexService**, **hexMVC**, **hexState** and **hexIoC** development is abandoned and not compatible anymore with higher version of hexMachina 0.35.0. 
